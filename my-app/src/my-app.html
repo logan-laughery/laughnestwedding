@@ -1,0 +1,124 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
+<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="my-icons.html">
+<link rel="import" href="my-page-title.html">
+<link rel="import" href="first-page.html">
+<link rel="import" href="second-page.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
+
+<dom-module id="my-app">
+  <style include="iron-flex"></style>
+  <template>
+    <style>
+	:host {
+	   display: block;
+	   height: 100%;
+	}
+
+	:host page-title {
+	   position: fixed;
+	}
+
+	:host neon-animated-pages {
+	   overflow-y: hidden;
+	   height: 100%;		  
+	}
+	
+	:host neon-animated-pages first-page {
+	   position: initial !important; 
+	   padding: 0px;
+	}
+
+	:host neon-animated-pages second-page {
+           position: initial !important;
+	   padding: 0px;
+	}
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"></app-route>
+    <page-title></page-title>
+    <!--
+    <neon-animated-pages id="pages" selected="0" class="horizontal layout center center-justified">
+        <first-page></first-page>
+        <second-page></second-page>
+    </neon-animated-pages>
+    -->
+    <div class="horizontal layout center center-justified" style="height: 100%"> 
+        <paper-button on-click="onPageOneClick">Page One</paper-button>
+  	<neon-animated-pages id="pages" selected="0"> 
+            <first-page></first-page>
+            <second-page></second-page>
+        </neon-animated-pages>
+	<paper-button on-click="onPageTwoClick">Page Two</paper-button>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'my-app',
+	onPageOneClick: function(page){
+		console.log(page);
+		this.$.pages.selected = 1;
+	},
+	onPageTwoClick: function(page){
+		console.log(page);
+		this.$.pages.selected = 0;
+	},
+      properties: {
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged'
+        }
+      },
+
+      observers: [
+        '_routePageChanged(routeData.page)'
+      ],
+
+      _routePageChanged: function(page) {
+        this.page = page || 'view1';
+      },
+
+      _pageChanged: function(page) {
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      },
+
+      _showPage404: function() {
+        this.page = 'view404';
+      }
+    });
+  </script>
+</dom-module>
