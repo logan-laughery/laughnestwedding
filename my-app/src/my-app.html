@@ -23,8 +23,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="my-icons.html">
 <link rel="import" href="my-page-title.html">
-<link rel="import" href="first-page.html">
-<link rel="import" href="second-page.html">
+<link rel="import" href="where-page.html">
+<link rel="import" href="what-page.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
@@ -49,12 +49,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	   height: 100%;		  
 	}
 	
-	:host neon-animated-pages first-page {
-	   position: initial !important; 
-	   padding: 0px;
-	}
-
-	:host neon-animated-pages second-page {
+	:host neon-animated-pages > * {
            position: initial !important;
 	   padding: 0px;
 	}
@@ -76,8 +71,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="horizontal layout center center-justified" style="height: 100%"> 
         <paper-button on-click="onPageOneClick">Page One</paper-button>
   	<neon-animated-pages id="pages" selected="0"> 
-            <first-page></first-page>
-            <second-page></second-page>
+            <what-page></what-page>
+            <where-page></where-page>
         </neon-animated-pages>
 	<paper-button on-click="onPageTwoClick">Page Two</paper-button>
     </div>
