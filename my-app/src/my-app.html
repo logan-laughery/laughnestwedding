@@ -25,6 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="my-page-title.html">
 <link rel="import" href="where-page.html">
 <link rel="import" href="what-page.html">
+<link rel="import" href="side-menu.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
@@ -53,6 +54,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
            position: initial !important;
 	   padding: 0px;
 	}
+
+	:host .my-page {
+	   position: absolute !important;
+	}
+
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -69,12 +75,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </neon-animated-pages>
     -->
     <div class="horizontal layout center center-justified" style="height: 100%"> 
-        <paper-button on-click="onPageOneClick">Page One</paper-button>
-  	<neon-animated-pages id="pages" selected="0"> 
-            <what-page></what-page>
-            <where-page></where-page>
+	<side-menu></side-menu>
+	<div style="height: 100%; width: 80%; position: relative;">
+	<neon-animated-pages id="pages" selected="0"> 
+            <what-page class="my-page"></what-page>
+            <where-page class="my-page"></where-page>
         </neon-animated-pages>
-	<paper-button on-click="onPageTwoClick">Page Two</paper-button>
+	</div>
+	<paper-button>Page Two</paper-button>
     </div>
   </template>
 
@@ -83,11 +91,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'my-app',
 	onPageOneClick: function(page){
 		console.log(page);
+		var node = this.shadowRoot.querySelector('side-menu');
+	//	node.what();
 		this.$.pages.selected = 1;
 	},
 	onPageTwoClick: function(page){
 		console.log(page);
+		var node = this.shadowRoot.querySelector('side-menu');
+	//	node.where();
 		this.$.pages.selected = 0;
+		//node.what();
 	},
       properties: {
         page: {
@@ -95,6 +108,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           reflectToAttribute: true,
           observer: '_pageChanged'
         }
+      },
+
+      listeners: {
+      	'where': 'onPageTwoClick',
+	'what': 'onPageOneClick'
       },
 
       observers: [

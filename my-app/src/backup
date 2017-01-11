@@ -3,7 +3,7 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 
-<dom-module id="where-page">
+<dom-module id="what-page">
     <!-- Defines the element's style and local DOM -->
     <template>
         <style include="iron-flex"></style>
@@ -23,52 +23,50 @@
 
         
         <div class="horizontal layout center center-justified" style="height:100%">
-        <div id="leftPage" class="horizontal layout center center-justified" style="height:100%">
-            <div class="pane" style="background:green">left page</div>
+        <div id="firstPage" class="horizontal layout center center-justified" style="height:100%">
+            <div class="pane" style="background:red">first page</div>
         </div>
-        <div id="rightPage" class="horizontal layout center center-justified" style="height:100%">
-            <div class="pane" style="background:gray">right page</div>
+        <div id="secondPage" class="horizontal layout center center-justified" style="height:100%">
+            <div class="pane" style="background:blue">second page</div>
         </div>
         </div>
     </template>
     <!-- Creates the element's prototype and registers it -->
     <script>
         Polymer({
-            is: 'where-page',
+            is: 'what-page',
 	    behaviors: [
 	    	Polymer.NeonSharedElementAnimatableBehavior
 	    ],
 	    properties: {
 	        animationConfig: {
 	    	    value: function() {
-			var container = Polymer.dom(this).parentNode;
-		        var leftSide = Polymer.dom(this.root).querySelector('#leftPage');
-                var rightSide = Polymer.dom(this.root).querySelector('#rightPage');
+		        var left = Polymer.dom(this.root).querySelector('#firstPage');
+                var right = Polymer.dom(this.root).querySelector('#secondPage');
                 return {
-		    	   'entry': [
-			   {
+		    	   'entry': [{
 			        name: 'transform-animation',
-			        node: leftSide,
-                    transformFrom: 'translateY(-100%)',
+			        node: left,
+                    transformFrom: 'translateY(-' + '100' + '%)',
                     transformTo: 'none',
 				timing: {
 				    delay: 1000
 				}
                    },{
                        name: 'slide-from-bottom-animation',
-                       node: rightSide,
+                       node: right,
                        timing: {
                            delay: 1000
                        }
                    }],
 			    'exit': [{
 			        name: 'transform-animation',
-			        node: leftSide,
+			        node: left,
                     transformFrom: 'none',
                     transformTo: 'translateY(100%)'
                 },{
                     name: 'slide-up-animation',
-                    node: rightSide
+                    node: right
                 }]	
 		        }
 		    }

@@ -1,0 +1,86 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
+
+<dom-module id="side-menu">
+  <template>
+    <style>
+    </style>
+
+    <div id="menu">
+      <div id="what" on-click="what">
+        what
+      </div>
+      <div id="when" on-click="where">
+	when
+      </div>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      is: 'side-menu',
+      behaviors: [
+        Polymer.NeonAnimationRunnerBehavior 
+      ],
+      properties: {
+       opened: {
+         type: Boolean
+       },
+       position: {
+	 type: Number,
+	 value: 0 
+       },
+       animationConfig: {
+         value: function() {
+	   var menuContainer = Polymer.dom(this.root).querySelector('#menu');
+	   var whatContainer = Polymer.dom(this.root).querySelector('#what');
+	   var whenContainer = Polymer.dom(this.root).querySelector('#when');
+	   return {
+             'where': [{
+	       name: 'transform-animation',
+	       node: menuContainer,
+	       transformTo: 'translateY(50%)'
+	     },{
+	       name: 'scale-up-animation',
+	       node: whenContainer 
+	     }],	     
+	     'what': [{
+	       name: 'transform-animation',
+	       node: menuContainer,
+	       transformTo: 'translateY(-50%)' 
+	     },{
+	       name: 'scale-up-animation',
+	       node: whatContainer     
+	     }]
+	   } 
+	 } 
+       }
+      },
+      listeners: {
+        'neon-animation-finish': '_onNeonAnimationFinish'
+      },
+      what: function () {
+	this.fire('what');
+	this.opened = true;
+	this.position = -50;
+	this.playAnimation('what');
+      },
+      where: function () {
+	this.fire('where');
+        this.opened = false;
+      	this.position = 50;
+      	this.playAnimation('where');
+      },
+      _onNeonAnimationFinish: function () {
+	var menu = Polymer.dom(this.root).querySelector('#menu');
+	menu.style.transform = 'translateY(' + this.position  + '%)';
+	if (!this.opened) {
+          //this.style.display = 'none';	
+	}	
+      } 
+    });
+  </script>
+</dom-module>
