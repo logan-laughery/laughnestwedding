@@ -11,10 +11,10 @@
     </style>
 
     <div id="menu">
-      <div id="what" on-click="what">
+      <div id="what" on-click="whatClick">
         what
       </div>
-      <div id="when" on-click="where">
+      <div id="when" on-click="whereClick">
 	when
       </div>
     </div>
@@ -63,16 +63,20 @@
         'neon-animation-finish': '_onNeonAnimationFinish'
       },
       what: function () {
-	this.fire('what');
 	this.opened = true;
 	this.position = -50;
 	this.playAnimation('what');
       },
+      whatClick: function () {
+      	this.fire('what');
+      },
       where: function () {
-	this.fire('where');
         this.opened = false;
       	this.position = 50;
       	this.playAnimation('where');
+      },
+      whereClick: function () {
+      	this.fire('where');
       },
       _onNeonAnimationFinish: function () {
 	var menu = Polymer.dom(this.root).querySelector('#menu');
