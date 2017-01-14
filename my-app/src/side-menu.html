@@ -8,13 +8,16 @@
 <dom-module id="side-menu">
   <template>
     <style>
+	.large {
+	  font-size: 24px;
+	}
     </style>
 
     <div id="menu">
-      <div id="what" on-click="whatClick">
+       <div id="what" on-click="whatClick" class$="{{getClass('what',targetItem,loading)}}">
         what
       </div>
-      <div id="when" on-click="whereClick">
+      <div id="when" on-click="whereClick" class$="{{getClass('when',targetItem,loading)}}">
 	when
       </div>
     </div>
@@ -32,6 +35,14 @@
        position: {
 	 type: Number,
 	 value: 0 
+       },
+       targetItem: {
+         type: String,
+	 value: 'what'
+       },
+       loading: {
+         type: Boolean,
+	 value: false
        },
        animationConfig: {
          value: function() {
@@ -62,7 +73,14 @@
       listeners: {
         'neon-animation-finish': '_onNeonAnimationFinish'
       },
+      getClass: function (name, target, loading) {
+	if (name == target && !loading) {
+	  return 'large';
+	}
+	return '';
+      },
       what: function () {
+	this.loading = true;
 	this.opened = true;
 	this.position = -50;
 	this.playAnimation('what');
@@ -71,6 +89,7 @@
       	this.fire('what');
       },
       where: function () {
+	this.loading = true;
         this.opened = false;
       	this.position = 50;
       	this.playAnimation('where');
@@ -79,11 +98,9 @@
       	this.fire('where');
       },
       _onNeonAnimationFinish: function () {
+	this.loading = false;
 	var menu = Polymer.dom(this.root).querySelector('#menu');
 	menu.style.transform = 'translateY(' + this.position  + '%)';
-	if (!this.opened) {
-          //this.style.display = 'none';	
-	}	
       } 
     });
   </script>

@@ -14,8 +14,8 @@
                 height: 100%;
             }
 	    .pane {
-	    	height: 325px;
-		width: 220px;
+	    	height: 575px;
+		width: 375px;
 		margin-left: 10px;
 		margin-right: 10px;
 	    }
@@ -50,13 +50,15 @@
                     transformFrom: 'translateY(-' + '100' + '%)',
                     transformTo: 'none',
 				timing: {
-				    delay: 1000
+				    delay: 1,
+				    duration: 1000
 				}
                    },{
                        name: 'slide-from-bottom-animation',
                        node: right,
                        timing: {
-                           delay: 1000
+                           delay: 1,
+			   duration: 1000
                        }
                    }],
 			    'exit': [{
