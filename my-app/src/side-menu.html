@@ -4,104 +4,105 @@
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animations.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 
 <dom-module id="side-menu">
-  <template>
+    <template>
     <style>
-	.large {
-	  font-size: 24px;
-	}
+    	.large {
+    	  font-size: 24px;
+    	}
+      .menu-item {
+        font-family: 'Oswald', sans-serif;
+      }
     </style>
 
     <div id="menu">
-       <div id="what" on-click="whatClick" class$="{{getClass('what',targetItem,loading)}}">
+       <div id="what" on-click="whatClick" class$="menu-item {{getClass('what',targetItem,loading)}}">
         what
       </div>
-      <div id="when" on-click="whereClick" class$="{{getClass('when',targetItem,loading)}}">
-	when
+      <div id="when" on-click="whereClick" class$="menu-item {{getClass('where',targetItem,loading)}}">
+        when
       </div>
     </div>
   </template>
-  <script>
-    Polymer({
-      is: 'side-menu',
-      behaviors: [
-        Polymer.NeonAnimationRunnerBehavior 
-      ],
-      properties: {
-       opened: {
-         type: Boolean
-       },
-       position: {
-	 type: Number,
-	 value: 0 
-       },
-       targetItem: {
-         type: String,
-	 value: 'what'
-       },
-       loading: {
-         type: Boolean,
-	 value: false
-       },
-       animationConfig: {
-         value: function() {
-	   var menuContainer = Polymer.dom(this.root).querySelector('#menu');
-	   var whatContainer = Polymer.dom(this.root).querySelector('#what');
-	   var whenContainer = Polymer.dom(this.root).querySelector('#when');
-	   return {
-             'where': [{
-	       name: 'transform-animation',
-	       node: menuContainer,
-	       transformTo: 'translateY(50%)'
-	     },{
-	       name: 'scale-up-animation',
-	       node: whenContainer 
-	     }],	     
-	     'what': [{
-	       name: 'transform-animation',
-	       node: menuContainer,
-	       transformTo: 'translateY(-50%)' 
-	     },{
-	       name: 'scale-up-animation',
-	       node: whatContainer     
-	     }]
-	   } 
-	 } 
-       }
-      },
-      listeners: {
-        'neon-animation-finish': '_onNeonAnimationFinish'
-      },
-      getClass: function (name, target, loading) {
-	if (name == target && !loading) {
-	  return 'large';
-	}
-	return '';
-      },
-      what: function () {
-	this.loading = true;
-	this.opened = true;
-	this.position = -50;
-	this.playAnimation('what');
-      },
-      whatClick: function () {
-      	this.fire('what');
-      },
-      where: function () {
-	this.loading = true;
-        this.opened = false;
-      	this.position = 50;
-      	this.playAnimation('where');
-      },
-      whereClick: function () {
-      	this.fire('where');
-      },
-      _onNeonAnimationFinish: function () {
-	this.loading = false;
-	var menu = Polymer.dom(this.root).querySelector('#menu');
-	menu.style.transform = 'translateY(' + this.position  + '%)';
-      } 
-    });
-  </script>
+    <script>
+        Polymer({
+            is: 'side-menu',
+            behaviors: [
+                Polymer.NeonAnimationRunnerBehavior
+            ],
+            properties: {
+                position: {
+                    type: Number,
+                    value: 0
+                },
+                targetItem: {
+                    type: String,
+                    value: 'what'
+                },
+                loading: {
+                    type: Boolean,
+                    value: false
+                },
+                animationConfig: {
+                    value: function() {
+                        var menuContainer = Polymer.dom(this.root).querySelector('#menu');
+                        var whatContainer = Polymer.dom(this.root).querySelector('#what');
+                        var whenContainer = Polymer.dom(this.root).querySelector('#when');
+                        return {
+                            'where': [{
+                                name: 'transform-animation',
+                                node: menuContainer,
+                                transformTo: 'translateY(50%)'
+                            }, {
+                                name: 'scale-up-animation',
+                                node: whenContainer
+                            }],
+                            'what': [{
+                                name: 'transform-animation',
+                                node: menuContainer,
+                                transformTo: 'translateY(-50%)'
+                            }, {
+                                name: 'scale-up-animation',
+                                node: whatContainer
+                            }]
+                        }
+                    }
+                }
+            },
+            listeners: {
+                'neon-animation-finish': '_onNeonAnimationFinish'
+            },
+            getClass: function(name, target, loading) {
+                if (name == target && !loading) {
+                    return 'large';
+                }
+                return '';
+            },
+            what: function() {
+                this.targetItem = 'what';
+                this.loading = true;
+                this.position = -50;
+                this.playAnimation('what');
+            },
+            whatClick: function() {
+                this.fire('what');
+            },
+            where: function() {
+                this.targetItem = 'where';
+                this.loading = true;
+                this.position = 50;
+                this.playAnimation('where');
+            },
+            whereClick: function() {
+                this.fire('where');
+            },
+            _onNeonAnimationFinish: function() {
+                this.loading = false;
+                var menu = Polymer.dom(this.root).querySelector('#menu');
+                menu.style.transform = 'translateY(' + this.position + '%)';
+            }
+        });
+    </script>
 </dom-module>
