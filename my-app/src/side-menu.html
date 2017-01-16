@@ -10,20 +10,32 @@
     <template>
     <style>
     	.large {
-    	  font-size: 24px;
+    	  transform: scale(2);
     	}
-      .menu-item {
-        font-family: 'Oswald', sans-serif;
-      }
+	.menu-item {
+          font-family: 'Oswald', sans-serif;
+      	}
+	.wrapper {
+	  height: 40px;
+	  //width: 80px;
+	  //text-align: left;
+	}
+	#menu {
+	  height: 100px;
+	  transition: .5s;
+	  transition-delay: .5s;
+	}
     </style>
 
     <div id="menu">
+	    <div class="wrapper">
        <div id="what" on-click="whatClick" class$="menu-item {{getClass('what',targetItem,loading)}}">
         what
-      </div>
+       </div></div>
+       <div class="wrapper">
       <div id="when" on-click="whereClick" class$="menu-item {{getClass('where',targetItem,loading)}}">
         when
-      </div>
+      </div></div>
     </div>
   </template>
     <script>
@@ -32,6 +44,16 @@
             behaviors: [
                 Polymer.NeonAnimationRunnerBehavior
             ],
+            listeners: {
+                'neon-animation-finish': '_onNeonAnimationFinish'
+            },
+            getClass: function(name, target, loading) {
+                if (name == target && !loading) {
+                    return 'large';
+                }
+                return '';
+            },
+		
             properties: {
                 position: {
                     type: Number,
@@ -53,20 +75,40 @@
                         return {
                             'where': [{
                                 name: 'transform-animation',
-                                node: menuContainer,
-                                transformTo: 'translateY(50%)'
-                            }, {
-                                name: 'scale-up-animation',
-                                node: whenContainer
+                                node: whenContainer,
+				transformTo: 'scale(2)',
+				timing: {
+				    delay: 1000,
+				    duration: 500
+				}
                             }],
                             'what': [{
                                 name: 'transform-animation',
-                                node: menuContainer,
-                                transformTo: 'translateY(-50%)'
-                            }, {
-                                name: 'scale-up-animation',
-                                node: whatContainer
-                            }]
+                                node: whatContainer,
+				transformTo: 'scale(2)',
+				timing: {
+				    delay: 1000,
+				    duration: 500
+				}
+                            }],
+			    'exit-where': [{
+			    	name: 'transform-animation',
+				node: whenContainer,
+				transformTo: 'scale(1)',
+				transformFrom: 'scale(2)',
+				timing: {
+				    duration: 500
+				}
+			    }],
+			    'exit-what': [{
+			    	name: 'transform-animation',
+				node: whatContainer,
+				transformTo: 'scale(1)',
+				transformFrom: 'scale(2)',
+				timing: {
+				    duration: 500
+				}
+			    }]
                         }
                     }
                 }
@@ -81,6 +123,8 @@
                 return '';
             },
             what: function() {
+		this.playAnimation('exit-where');
+		this.$.menu.style.transform = 'translateY(-50%)';		
                 this.targetItem = 'what';
                 this.loading = true;
                 this.position = -50;
@@ -90,6 +134,8 @@
                 this.fire('what');
             },
             where: function() {
+		this.playAnimation('exit-what');
+		this.$.menu.style.transform = 'translateY(50%)';
                 this.targetItem = 'where';
                 this.loading = true;
                 this.position = 50;
@@ -99,9 +145,11 @@
                 this.fire('where');
             },
             _onNeonAnimationFinish: function() {
+		if (this.loading) {
                 this.loading = false;
                 var menu = Polymer.dom(this.root).querySelector('#menu');
-                menu.style.transform = 'translateY(' + this.position + '%)';
+                //menu.style.transform = 'translateY(' + this.position + '%)';
+		}
             }
         });
     </script>
