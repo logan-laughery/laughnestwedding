@@ -10,10 +10,12 @@
     <template>
     <style>
     	.large {
-    	  transform: scale(2);
+    	  transform: scale(2) translateX(2px);
+	  transform-origin: right;
     	}
 	.menu-item {
           font-family: 'Oswald', sans-serif;
+	  text-align: right;
       	}
 	.wrapper {
 	  height: 40px;
@@ -53,7 +55,6 @@
                 }
                 return '';
             },
-		
             properties: {
                 position: {
                     type: Number,
@@ -76,7 +77,8 @@
                             'where': [{
                                 name: 'transform-animation',
                                 node: whenContainer,
-				transformTo: 'scale(2)',
+				transformTo: 'scale(2) translateX(2px)',
+				transformOrigin: 'right',
 				timing: {
 				    delay: 1000,
 				    duration: 500
@@ -85,7 +87,8 @@
                             'what': [{
                                 name: 'transform-animation',
                                 node: whatContainer,
-				transformTo: 'scale(2)',
+				transformTo: 'scale(2) translateX(2px)',
+				transformOrigin: 'right',
 				timing: {
 				    delay: 1000,
 				    duration: 500
@@ -95,7 +98,8 @@
 			    	name: 'transform-animation',
 				node: whenContainer,
 				transformTo: 'scale(1)',
-				transformFrom: 'scale(2)',
+				transformFrom: 'scale(2) translateX(2px)',
+				transformOrigin: 'right',
 				timing: {
 				    duration: 500
 				}
@@ -104,7 +108,8 @@
 			    	name: 'transform-animation',
 				node: whatContainer,
 				transformTo: 'scale(1)',
-				transformFrom: 'scale(2)',
+				transformFrom: 'scale(2) translateX(2px)',
+				transformOrigin: 'right',
 				timing: {
 				    duration: 500
 				}
