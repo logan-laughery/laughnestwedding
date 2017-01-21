@@ -25,6 +25,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="my-page-title.html">
 <link rel="import" href="where-page.html">
 <link rel="import" href="what-page.html">
+<link rel="import" href="when-page.html">
 <link rel="import" href="side-menu.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
@@ -79,6 +80,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div style="height: 100%; width: 80%; position: relative;">
             <neon-animated-pages id="pages" selected="0">
                 <what-page class="my-page"></what-page>
+                <when-page class="my-page"></when-page>
                 <where-page class="my-page"></where-page>
             </neon-animated-pages>
         </div>
@@ -88,22 +90,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script>
         Polymer({
             is: 'my-app',
-            onPageOneClick: function(page) {
-                console.log(page);
+            whatClick: function(page) {
                 var node = this.shadowRoot.querySelector('#left-menu');
                 var rnode = this.shadowRoot.querySelector('#right-menu');
                 node.what();
                 rnode.what();
+                this.$.pages.selected = 0;
+            },
+            whenClick: function(page) {
+                var node = this.shadowRoot.querySelector('#left-menu');
+                var rnode = this.shadowRoot.querySelector('#right-menu');
+                node.when();
+                rnode.when();
                 this.$.pages.selected = 1;
             },
-            onPageTwoClick: function(page) {
-                console.log(page);
+            whereClick: function(page) {
                 var node = this.shadowRoot.querySelector('#left-menu');
                 var rnode = this.shadowRoot.querySelector('#right-menu');
                 node.where();
                 rnode.where();
-                this.$.pages.selected = 0;
-                //node.what();
+                this.$.pages.selected = 2;
             },
             properties: {
                 page: {
@@ -114,8 +120,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             },
 
             listeners: {
-                'where': 'onPageTwoClick',
-                'what': 'onPageOneClick'
+                'where': 'whereClick',
+                'what': 'whatClick',
+                'when': 'whenClick'
             },
 
             observers: [

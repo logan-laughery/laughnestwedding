@@ -1,0 +1,81 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="when-page">
+    <!-- Defines the element's style and local DOM -->
+    <template>
+        <style include="iron-flex"></style>
+        <style>
+             :host {
+                display: block;
+                padding: 16px;
+                height: 100%;
+            }
+
+            .pane {
+                height: 575px;
+                width: 375px;
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        </style>
+
+
+        <div class="horizontal layout center center-justified" style="height:100%">
+        <div id="leftPage" class="horizontal layout center center-justified" style="height:100%">
+            <div class="pane" style="background:purple">left page</div>
+        </div>
+        <div id="rightPage" class="horizontal layout center center-justified" style="height:100%">
+            <div class="pane" style="background:yello">right page</div>
+        </div>
+        </div>
+    </template>
+    <!-- Creates the element's prototype and registers it -->
+    <script>
+        Polymer({
+            is: 'when-page',
+            behaviors: [
+                Polymer.NeonSharedElementAnimatableBehavior
+            ],
+            properties: {
+                animationConfig: {
+                    value: function() {
+                        var container = Polymer.dom(this).parentNode;
+                        var leftSide = Polymer.dom(this.root).querySelector('#leftPage');
+                        var rightSide = Polymer.dom(this.root).querySelector('#rightPage');
+                        return {
+                            'entry': [{
+                                name: 'transform-animation',
+                                node: leftSide,
+                                transformFrom: 'translateY(-100%)',
+                                transformTo: 'none',
+                                timing: {
+                                    delay: 1,
+                                    duration: 1000
+                                }
+                            }, {
+                                name: 'slide-from-bottom-animation',
+                                node: rightSide,
+                                timing: {
+                                    delay: 1,
+                                    duration: 1000
+                                }
+                            }],
+                            'exit': [{
+                                name: 'transform-animation',
+                                node: leftSide,
+                                transformFrom: 'none',
+                                transformTo: 'translateY(100%)'
+                            }, {
+                                name: 'slide-up-animation',
+                                node: rightSide
+                            }]
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>

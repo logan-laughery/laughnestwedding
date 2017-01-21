@@ -7,44 +7,58 @@
 <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 
 <dom-module id="side-menu">
-    <template>
+  <template>
     <style>
-    	.large {
-    	  transform: scale(2) translateX(1px);
-	  transform-origin: right;
-    	}
-	.large[data-direction$="left"]{
-	  transform: scale(2) translateX(-1px);
-	  transform-origin: left;
-	}
-	.menu-item {
+      .large {
+          transform: scale(2) translateX(1px);
+          transform-origin: right;
+      }
+
+      .large[data-direction$="left"] {
+          transform: scale(2) translateX(-1px);
+          transform-origin: left;
+      }
+
+      .menu-item {
           font-family: 'Oswald', sans-serif;
-	  text-align: right;
-      	}
-	.menu-item[data-direction$="left"]{
-	  text-align: left;
-	}
-	.wrapper {
-	  height: 40px;
-	  //width: 80px;
-	  //text-align: left;
-	}
-	#menu {
-	  height: 100px;
-	  transition: .5s;
-	  transition-delay: .5s;
-	}
+          text-align: right;
+          width: 100%;
+      }
+
+      .menu-item[data-direction$="left"] {
+          text-align: left;
+      }
+
+      .wrapper {
+          height: 40px;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+      }
+
+      #menu {
+          height: 120px;
+          transition: .5s;
+          transition-delay: .5s;
+      }
     </style>
 
     <div id="menu" class="{{direction}}">
-	    <div class="wrapper">
-       <div id="what" data-direction$="[[direction]]" on-click="whatClick" class$="menu-item {{getClass('what',targetItem,loading)}}">
-        what
-       </div></div>
-       <div class="wrapper">
-      <div id="when" data-direction$="[[direction]]" on-click="whereClick" class$="menu-item {{getClass('where',targetItem,loading)}}">
-        when
-      </div></div>
+        <div class="wrapper">
+            <div id="what" data-direction$="[[direction]]" on-click="whatClick" class$="menu-item {{getClass('what',targetItem,loading)}}">
+                what
+            </div>
+        </div>
+        <div class="wrapper">
+            <div id="when" data-direction$="[[direction]]" on-click="whenClick" class$="menu-item {{getClass('when',targetItem,loading)}}">
+                when
+            </div>
+        </div>
+        <div class="wrapper">
+            <div id="where" data-direction$="[[direction]]" on-click="whereClick" class$="menu-item {{getClass('where',targetItem,loading)}}">
+                where
+            </div>
+        </div>
     </div>
   </template>
     <script>
@@ -63,13 +77,9 @@
                 return '';
             },
             properties: {
-		direction: {
-		    type: String,
-		    value: 'left'
-		},
-                position: {
-                    type: Number,
-                    value: 0
+                direction: {
+                    type: String,
+                    value: 'left'
                 },
                 targetItem: {
                     type: String,
@@ -84,87 +94,128 @@
                         var menuContainer = Polymer.dom(this.root).querySelector('#menu');
                         var whatContainer = Polymer.dom(this.root).querySelector('#what');
                         var whenContainer = Polymer.dom(this.root).querySelector('#when');
+                        var whereContainer = Polymer.dom(this.root).querySelector('#where');
                         return {
-                            'where': [{
+                            'when': [{
                                 name: 'transform-animation',
                                 node: whenContainer,
-				transformTo: 'scale(2) translateX(1px)',
-				transformOrigin: 'right',
-				timing: {
-				    delay: 1000,
-				    duration: 500
-				}
+                                transformTo: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
                             }],
-                            'where-left': [{
+                            'when-left': [{
                                 name: 'transform-animation',
                                 node: whenContainer,
-				transformTo: 'scale(2) translateX(-1px)',
-				transformOrigin: 'left',
-				timing: {
-				    delay: 1000,
-				    duration: 500
-				}
-			    }],
+                                transformTo: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
                             'what': [{
                                 name: 'transform-animation',
                                 node: whatContainer,
-				transformTo: 'scale(2) translateX(1px)',
-				transformOrigin: 'right',
-				timing: {
-				    delay: 1000,
-				    duration: 500
-				}
+                                transformTo: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
                             }],
                             'what-left': [{
                                 name: 'transform-animation',
                                 node: whatContainer,
-				transformTo: 'scale(2) translateX(-1px)',
-				transformOrigin: 'left',
-				timing: {
-				    delay: 1000,
-				    duration: 500
-				}
-			    }],
-			    'exit-where': [{
-			    	name: 'transform-animation',
-				node: whenContainer,
-				transformTo: 'scale(1)',
-				transformFrom: 'scale(2) translateX(1px)',
-				transformOrigin: 'right',
-				timing: {
-				    duration: 500
-				}
-			    }],
-			    'exit-where-left': [{
-			    	name: 'transform-animation',
-				node: whenContainer,
-				transformTo: 'scale(1)',
-				transformFrom: 'scale(2) translateX(-1px)',
-				transformOrigin: 'left',
-				timing: {
-				    duration: 500
-				}
-			    }],
-			    'exit-what': [{
-			    	name: 'transform-animation',
-				node: whatContainer,
-				transformTo: 'scale(1)',
-				transformFrom: 'scale(2) translateX(1px)',
-				transformOrigin: 'right',
-				timing: {
-				    duration: 500
-				}
-			    }],
-			    'exit-what-left': [{
-			    	name: 'transform-animation',
-				node: whatContainer,
-				transformTo: 'scale(1)',
-				transformFrom: 'scale(2) translateX(-1px)',
-				transformOrigin: 'left',
-				timing: {
-				    duration: 500
-				}
-			    }]
+                                transformTo: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
+                            'where': [{
+                                name: 'transform-animation',
+                                node: whereContainer,
+                                transformTo: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
+                            'where-left': [{
+                                name: 'transform-animation',
+                                node: whereContainer,
+                                transformTo: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
+                            'exit-when': [{
+                                name: 'transform-animation',
+                                node: whenContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-when-left': [{
+                                name: 'transform-animation',
+                                node: whenContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-what': [{
+                                name: 'transform-animation',
+                                node: whatContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-what-left': [{
+                                name: 'transform-animation',
+                                node: whatContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-where': [{
+                                name: 'transform-animation',
+                                node: whereContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-where-left': [{
+                                name: 'transform-animation',
+                                node: whereContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    duration: 500
+                                }
+                            }]
                         }
                     }
                 }
@@ -179,45 +230,65 @@
                 return '';
             },
             what: function() {
-		if(this.direction == 'left')
-			this.playAnimation('exit-where-left');
-		else	
-			this.playAnimation('exit-where');
-		this.$.menu.style.transform = 'translateY(-50%)';		
-                this.targetItem = 'what';
-                this.loading = true;
-                this.position = -50;
-                if(this.direction == 'left')
-		       this.playAnimation('what-left');
-		else	
-		       this.playAnimation('what');
+                this.deselectItem();
+                this.shiftMenu('what');
+                this.selectItem();
             },
             whatClick: function() {
                 this.fire('what');
             },
+            when: function() {
+                this.deselectItem();
+                this.shiftMenu('when');
+                this.selectItem();
+            },
+            whenClick: function() {
+                this.fire('when');
+            },
             where: function() {
-		if(this.direction == 'left')
-			this.playAnimation('exit-what-left');
-		else
-			this.playAnimation('exit-what');
-		this.$.menu.style.transform = 'translateY(50%)';
-                this.targetItem = 'where';
-                this.loading = true;
-                this.position = 50;
-                if(this.direction == 'left')
-			this.playAnimation('where-left');
-	        else	
-		 	this.playAnimation('where');
+                this.deselectItem();
+                this.shiftMenu('where');
+                this.selectItem();
             },
             whereClick: function() {
                 this.fire('where');
             },
+            deselectItem: function() {
+                var animation = 'exit-' + this.targetItem;
+                if(this.direction == 'left')
+                  animation += '-left';
+                this.playAnimation(animation);
+            },
+            selectItem: function() {
+                var animation = this.targetItem;
+                if(this.direction == 'left')
+                  animation += '-left';
+                this.playAnimation(animation);
+            },
+            shiftMenu: function(item) {
+                this.targetItem = item;
+                var targetNode = Polymer.dom(this.root).querySelector('#' + item);
+                var index = Array.prototype.indexOf
+                  .call(targetNode.parentNode.parentNode.childNodes, targetNode.parentNode);
+                index = (index - 1) / 2;
+                var menuNode = Polymer.dom(this.root).querySelector('#menu');
+                var menuHeight = menuNode.clientHeight;
+                var menuMiddle = menuHeight / 2;
+                var elementCount = menuNode.childElementCount;
+                var itemHeight = menuHeight / elementCount;
+                var itemMiddle = itemHeight / 2;
+
+                var distanceFromStart = (index * itemHeight) + itemMiddle;
+                var shiftAmount = menuMiddle - distanceFromStart;
+
+                this.$.menu.style.transform = 'translateY(' + shiftAmount + 'px)';
+                this.loading = true;
+            },
             _onNeonAnimationFinish: function() {
-		if (this.loading) {
-                this.loading = false;
-                var menu = Polymer.dom(this.root).querySelector('#menu');
-                //menu.style.transform = 'translateY(' + this.position + '%)';
-		}
+                if (this.loading) {
+                    this.loading = false;
+                    var menu = Polymer.dom(this.root).querySelector('#menu');
+                }
             }
         });
     </script>
