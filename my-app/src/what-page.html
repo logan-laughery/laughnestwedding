@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet">
 
 <dom-module id="what-page">
     <!-- Defines the element's style and local DOM -->
@@ -18,16 +19,38 @@
 		width: 375px;
 		margin-left: 10px;
 		margin-right: 10px;
+		font-size: 21px;
+          	font-family: 'Lato', sans-serif;
+	    }
+	    :host img {
+	    	height: 100%;
+		width: 100%;
+	    }
+	    :host h2 {
+	    	font-size: 48px;
+		font-weight: 100;
+          	font-family: 'Oswald', sans-serif;
+	    }
+	    .pane-content {
+	    	padding: 20px;
+		padding-top: 0px;
 	    }
         </style>
 
 
         <div class="horizontal layout center center-justified" style="height:100%">
         <div id="firstPage" class="horizontal layout center center-justified" style="height:100%">
-            <div class="pane" style="background:#dce4f0">first page</div>
-        </div>
+            <paper-material elevation="2" class="pane" style="background:#91a7d0">
+		<div class="pane-content">
+		    <h2>Welcome</h2>	
+		We are so excited to be joined by allof you to celebratethe start of our marriage!  We cannot think of anyone better to share this special day with.  Here you will find details and directions for the ceremony and reception, booking information, as well as our registry.  Let the countdown begin!		
+		</div>
+	    </paper-material>	
+	</div>
         <div id="secondPage" class="horizontal layout center center-justified" style="height:100%">
-            <div class="pane" style="background:blue">second page</div>
+            <paper-material elevation="2" class="pane" style="background:blue">
+		    <img src="/images/what-image.jpg"/>
+	    </paper-material>
         </div>
         </div>
     </template>

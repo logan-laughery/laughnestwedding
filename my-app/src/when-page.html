@@ -2,6 +2,7 @@
 <link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
 
 <dom-module id="when-page">
     <!-- Defines the element's style and local DOM -->
@@ -25,10 +26,10 @@
 
         <div class="horizontal layout center center-justified" style="height:100%">
         <div id="leftPage" class="horizontal layout center center-justified" style="height:100%">
-            <div class="pane" style="background:purple">left page</div>
+            <paper-material elevation="2" class="pane" style="background:#f4b794">left page</paper-material>
         </div>
         <div id="rightPage" class="horizontal layout center center-justified" style="height:100%">
-            <div class="pane" style="background:yello">right page</div>
+            <paper-material elevation="2" class="pane" style="background:gray">right page</paper-material>
         </div>
         </div>
     </template>
