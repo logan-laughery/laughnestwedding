@@ -1,0 +1,163 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link href="https://fonts.googleapis.com/css?family=Oswald:300" rel="stylesheet">
+
+<dom-module id="mobile-what-page">
+    <!-- Defines the element's style and local DOM -->
+<template>
+        <style include="iron-flex"></style>
+        <style>
+        :host {
+          display: block;
+          padding: 16px;
+          height: 100%;
+        }
+
+        .pane {
+            position: relative;
+            width: 100%;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 21px;
+            font-family: 'Lato', sans-serif;
+            height: 100%;
+        }
+
+         :host img {
+            height: 100%;
+            width: 100%;
+        }
+
+         :host h2 {
+            font-size: 30px;
+            font-weight: 100;
+            font-family: 'Oswald', sans-serif;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .pane-content {
+            padding: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        :host p {
+          font-size: 12px;
+        }
+
+        :host #day-count {
+          text-align: right;
+          font-size: 20px;
+        }
+        /*:host iron-image {
+            width:100%;
+            --iron-image-width: 100%;
+            height:100%;
+            --iron-image-height: 100%;
+        }*/
+        :host iron-image {
+          width: 100%;
+          --iron-image-width: 100%;
+          height: 100%;
+          --iron-image-height: 100%;
+        }
+
+        :host {
+          --layout-fit: {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-position-y: top !important;
+          };
+        }
+    </style>
+
+
+        <div class="vertical layout center center-justified" style="height:100%">
+          <div id="secondPage" class="horizontal layout center center-justified page"
+            style="height:50%; width: 100%; padding-top: 34px; padding-bottom: 8px;">
+              <paper-material elevation="2" class="pane" style="background:blue">
+                  <div class="pane-content" style="padding: 0px; height: 100%;">
+                    <iron-image src="/images/what-image.jpg" sizing="cover"></iron-image>
+                  </div>
+              </paper-material>
+          </div>
+          <div id="firstPage" class="horizontal layout center center-justified page"
+            style="height:50%; width: 100%; padding-top: 8px; padding-bottom: 34px;">
+              <paper-material elevation="2" class="pane" style="background:#91a7d0">
+                  <div class="pane-content">
+                    <h2>Welcome</h2>
+                    <p>
+                      We are so excited to be joined by all of you to celebrate
+                      the start of our marriage! We cannot think of anyone
+                      better to share this special day with. Here you will find
+                      details and directions for the ceremony and reception,
+                      booking information, as well as our registry.
+                      Let the countdown begin!
+                    </p>
+                    <h2 id="day-count">200 days</h2>
+                  </div>
+              </paper-material>
+          </div>
+      </div>
+    </template>
+    <!-- Creates the element's prototype and registers it -->
+    <script>
+        Polymer({
+            is: 'mobile-what-page',
+            behaviors: [
+                Polymer.NeonSharedElementAnimatableBehavior
+            ],
+            properties: {
+                animationConfig: {
+                    value: function() {
+                        var bottom = Polymer.dom(this.root).querySelector('#firstPage');
+                        var top = Polymer.dom(this.root).querySelector('#secondPage');
+                        return {
+                            'entry': [{
+                                name: 'slide-from-top-animation',
+                                node: top,
+                                timing: {
+                                    delay: 1000,
+                                    duration: 1000
+                                }
+                            }, {
+                                name: 'slide-from-bottom-animation',
+                                node: bottom,
+                                timing: {
+                                    delay: 1000,
+                                    duration: 1000
+                                }
+                            }],
+                            'exit': [{
+                              name: 'transform-animation',
+                              node: bottom,
+                              transformFrom: 'none',
+                              transformTo: 'translateY(200%)',
+                                timing: {
+                                    delay: 1,
+                                    duration: 1000
+                                }
+                            }, {
+                                name: 'transform-animation',
+                                node: top,
+                                transformFrom: 'none',
+                                transformTo: 'translateY(-200%)',
+                                timing: {
+                                    delay: 1,
+                                    duration: 1000
+                                }
+                            }]
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</dom-module>

@@ -16,21 +16,24 @@
             }
 
             .pane {
-                height: 575px;
-                width: 375px;
+                position: relative;
+                width: 100%;
+                padding-top: 142%;
                 margin-left: 10px;
                 margin-right: 10px;
+                font-size: 21px;
+                font-family: 'Lato', sans-serif;
             }
         </style>
 
 
         <div class="horizontal layout center center-justified" style="height:100%">
-        <div id="leftPage" class="horizontal layout center center-justified" style="height:100%">
-            <paper-material elevation="2" class="pane" style="background:#f4b794">left page</paper-material>
-        </div>
-        <div id="rightPage" class="horizontal layout center center-justified" style="height:100%">
-            <paper-material elevation="2" class="pane" style="background:gray">right page</paper-material>
-        </div>
+          <div id="leftPage" class="horizontal layout center center-justified" style="height:100%; width: 50%;">
+              <paper-material elevation="2" class="pane" style="background:#f4b794">left page</paper-material>
+          </div>
+          <div id="rightPage" class="horizontal layout center center-justified" style="height:100%; width: 50%;">
+              <paper-material elevation="2" class="pane" style="background:gray">right page</paper-material>
+          </div>
         </div>
     </template>
     <!-- Creates the element's prototype and registers it -->

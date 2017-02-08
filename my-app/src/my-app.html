@@ -27,11 +27,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="what-page.html">
 <link rel="import" href="when-page.html">
 <link rel="import" href="side-menu.html">
+<link rel="import" href="mobile-side-menu.html">
+<link rel="import" href="mobile-page-title.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animations.html">
 <link rel="import" href="../bower_components/paper-styles/color.html">
+<link rel="import" href="mobile-what-page.html">
 
 <dom-module id="my-app">
     <style include="iron-flex"></style>
@@ -47,6 +50,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	   font-weight: 100;
 	}
 
+  :host mobile-page-title {
+     position: fixed;
+  }
+
 	:host neon-animated-pages {
 	   overflow-y: hidden;
 	   height: 100%;
@@ -61,6 +68,60 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	   position: absolute !important;
 	}
 
+
+
+  /* Viewport is 321px or more ----------- */
+  @media only screen and (min-width : 701px) {
+    /* Styles */
+    .page {
+      height: 100%;
+      width: 80%;
+      position: relative;
+    }
+
+    #mobile-view {
+      display: none;
+    }
+  }
+
+  /* Viewport is 320px or less ----------- */
+  @media only screen and (max-width : 700px) {
+    /* Styles */
+    .page {
+      height: 100%;
+      width: 80%;
+      position: relative;
+    }
+
+    #desktop-view {
+      display: none;
+    }
+  }
+
+  /* Desktops and laptops ----------- */
+  @media only screen  and (min-width : 1000px) {
+    /* Styles */
+    .page {
+      height: 100%;
+      width: 80%;
+      position: relative;
+    }
+  }
+
+
+  /* Desktops and laptops ----------- */
+  @media only screen  and (min-width : 1360px) {
+    /* Styles */
+    .page {
+      height: 100%;
+      width: 1080px;
+      position: relative;
+    }
+  }
+
+  #mobile-menu {
+    width: 64px;
+  }
     </style>
 
     <app-location route="{{route}}"></app-location>
@@ -69,23 +130,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         pattern="/:page"
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
-    <page-title></page-title>
+    <page-title style="display: none;"></page-title>
+    <mobile-page-title></mobile-page-title>
     <!--
     <neon-animated-pages id="pages" selected="0" class="horizontal layout center center-justified">
         <first-page></first-page>
         <second-page></second-page>
     </neon-animated-pages>
     -->
-    <div class="horizontal layout center center-justified" style="height: 100%">
-        <side-menu direction="right" id="left-menu"></side-menu>
-        <div style="height: 100%; width: 80%; position: relative;">
+    <div id="desktop-view" class="horizontal layout center center-justified" style="height: 100%;">
+        <side-menu direction="right" id="left-menu" style="width: 65px;"></side-menu>
+        <div class="page">
             <neon-animated-pages id="pages" selected="0">
                 <what-page class="my-page"></what-page>
                 <when-page class="my-page"></when-page>
                 <where-page class="my-page"></where-page>
             </neon-animated-pages>
         </div>
-        <side-menu id="right-menu"></side-menu>
+        <side-menu id="right-menu" style="width: 65px;"></side-menu>
+    </div>
+    <div id="mobile-view" class="horizontal layout center center-justified" style="height: 100%;">
+        <mobile-side-menu direction="right" id="mobile-menu"></mobile-side-menu>
+        <div class="page">
+            <neon-animated-pages id="mobilepages" selected="0">
+                <mobile-what-page class="my-page"></mobile-what-page>
+                <mobile-what-page class="my-page"></mobile-what-page>
+                <mobile-what-page class="my-page"></mobile-what-page>
+            </neon-animated-pages>
+        </div>
     </div>
   </template>
     <script>
@@ -112,6 +184,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 rnode.where();
                 this.$.pages.selected = 2;
             },
+            mobileWhereClick: function(page) {
+              var node = this.shadowRoot.querySelector('#mobile-menu');
+              node.where();
+              this.$.mobilepages.selected = 2;
+            },
+            mobileWhatClick: function(page) {
+              var node = this.shadowRoot.querySelector('#mobile-menu');
+              node.what();
+              this.$.mobilepages.selected = 0;
+            },
+            mobileWhenClick: function(page) {
+              var node = this.shadowRoot.querySelector('#mobile-menu');
+              node.when();
+              this.$.mobilepages.selected = 1;
+            },
             properties: {
                 page: {
                     type: String,
@@ -123,7 +210,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             listeners: {
                 'where': 'whereClick',
                 'what': 'whatClick',
-                'when': 'whenClick'
+                'when': 'whenClick',
+                'mobileWhere': 'mobileWhereClick',
+                'mobileWhat': 'mobileWhatClick',
+                'mobileWhen': 'mobileWhenClick'
             },
 
             observers: [

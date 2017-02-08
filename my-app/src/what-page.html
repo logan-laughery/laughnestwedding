@@ -6,97 +6,116 @@
 
 <dom-module id="what-page">
     <!-- Defines the element's style and local DOM -->
-    <template>
+<template>
         <style include="iron-flex"></style>
         <style>
-            :host {
-                display: block;
-                padding: 16px;
-                height: 100%;
-            }
-	    .pane {
-	    	height: 575px;
-		width: 375px;
-		margin-left: 10px;
-		margin-right: 10px;
-		font-size: 21px;
-          	font-family: 'Lato', sans-serif;
-	    }
-	    :host img {
-	    	height: 100%;
-		width: 100%;
-	    }
-	    :host h2 {
-	    	font-size: 48px;
-		font-weight: 100;
-          	font-family: 'Oswald', sans-serif;
-	    }
-	    .pane-content {
-	    	padding: 20px;
-		padding-top: 0px;
-	    }
-        </style>
+        :host {
+          display: block;
+          padding: 16px;
+          height: 100%;
+        }
+
+        .pane {
+            position: relative;
+            width: 100%;
+            padding-top: 142%;
+            margin-left: 10px;
+            margin-right: 10px;
+            font-size: 21px;
+            font-family: 'Lato', sans-serif;
+        }
+
+         :host img {
+            height: 100%;
+            width: 100%;
+        }
+
+         :host h2 {
+            font-size: 48px;
+            font-weight: 100;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .pane-content {
+            padding: 20px;
+            padding-top: 0px;
+            position:  absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+    </style>
 
 
         <div class="horizontal layout center center-justified" style="height:100%">
-        <div id="firstPage" class="horizontal layout center center-justified" style="height:100%">
-            <paper-material elevation="2" class="pane" style="background:#91a7d0">
-		<div class="pane-content">
-		    <h2>Welcome</h2>	
-		We are so excited to be joined by allof you to celebratethe start of our marriage!  We cannot think of anyone better to share this special day with.  Here you will find details and directions for the ceremony and reception, booking information, as well as our registry.  Let the countdown begin!		
-		</div>
-	    </paper-material>	
-	</div>
-        <div id="secondPage" class="horizontal layout center center-justified" style="height:100%">
-            <paper-material elevation="2" class="pane" style="background:blue">
-		    <img src="/images/what-image.jpg"/>
-	    </paper-material>
-        </div>
-        </div>
+          <div id="firstPage" class="horizontal layout center center-justified page" style="height:100%; width: 50%;">
+              <paper-material elevation="2" class="pane" style="background:#91a7d0">
+                  <div class="pane-content">
+                      <h2>Welcome</h2>
+                      We are so excited to be joined by all of you to celebrate
+                      the start of our marriage! We cannot think of anyone
+                      better to share this special day with. Here you will find
+                      details and directions for the ceremony and reception,
+                      booking information, as well as our registry.
+                      Let the countdown begin!
+                      <br/>
+                      <h2>200 days</h2>
+                  </div>
+              </paper-material>
+          </div>
+          <div id="secondPage" class="horizontal layout center center-justified page" style="height:100%; width: 50%;">
+              <paper-material elevation="2" class="pane" style="background:blue">
+                  <div class="pane-content" style="padding: 0px;">
+                    <img src="/images/what-image.jpg" />
+                  </div>
+              </paper-material>
+          </div>
+      </div>
     </template>
     <!-- Creates the element's prototype and registers it -->
     <script>
         Polymer({
             is: 'what-page',
-	    behaviors: [
-	    	Polymer.NeonSharedElementAnimatableBehavior
-	    ],
-	    properties: {
-	        animationConfig: {
-	    	    value: function() {
-		        var left = Polymer.dom(this.root).querySelector('#firstPage');
-                var right = Polymer.dom(this.root).querySelector('#secondPage');
-                return {
-		    	   'entry': [{
-			        name: 'transform-animation',
-			        node: left,
-                    transformFrom: 'translateY(-' + '100' + '%)',
-                    transformTo: 'none',
-				timing: {
-				    delay: 1,
-				    duration: 1000
-				}
-                   },{
-                       name: 'slide-from-bottom-animation',
-                       node: right,
-                       timing: {
-                           delay: 1,
-			   duration: 1000
-                       }
-                   }],
-			    'exit': [{
-			        name: 'transform-animation',
-			        node: left,
-                    transformFrom: 'none',
-                    transformTo: 'translateY(100%)'
-                },{
-                    name: 'slide-up-animation',
-                    node: right
-		}]
-		        }
-		    }
-	        }
-	    }
+            behaviors: [
+                Polymer.NeonSharedElementAnimatableBehavior
+            ],
+            properties: {
+                animationConfig: {
+                    value: function() {
+                        var left = Polymer.dom(this.root).querySelector('#firstPage');
+                        var right = Polymer.dom(this.root).querySelector('#secondPage');
+                        return {
+                            'entry': [{
+                                name: 'transform-animation',
+                                node: left,
+                                transformFrom: 'translateY(-' + '100' + '%)',
+                                transformTo: 'none',
+                                timing: {
+                                    delay: 1,
+                                    duration: 1000
+                                }
+                            }, {
+                                name: 'slide-from-bottom-animation',
+                                node: right,
+                                timing: {
+                                    delay: 1,
+                                    duration: 1000
+                                }
+                            }],
+                            'exit': [{
+                                name: 'transform-animation',
+                                node: left,
+                                transformFrom: 'none',
+                                transformTo: 'translateY(100%)'
+                            }, {
+                                name: 'slide-up-animation',
+                                node: right
+                            }]
+                        }
+                    }
+                }
+            }
         });
     </script>
 </dom-module>

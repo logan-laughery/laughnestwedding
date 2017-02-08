@@ -1,0 +1,314 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+<dom-module id="mobile-side-menu">
+  <template>
+    <style>
+      .large {
+          transform: scale(2) translateX(1px);
+          transform-origin: right;
+      }
+
+      .large[data-direction$="left"] {
+          transform: scale(2) translateX(-1px);
+          transform-origin: left;
+      }
+
+      .menu-item {
+          font-family: 'Oswald', sans-serif;
+          text-align: right;
+          width: 100%;
+          font-size: 11px;
+      }
+
+      .menu-item[data-direction$="left"] {
+          text-align: left;
+      }
+
+      .wrapper {
+          height: 25px;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+      }
+
+      #menu {
+          height: 75px;
+          transition: .5s;
+          transition-delay: .5s;
+          transform: translateY(25px)
+      }
+
+      /* Viewport is 321px or more ----------- */
+      @media only screen and (min-width : 550px) {
+        .menu-item {
+            font-size: 14px;
+        }
+        .wrapper {
+            height: 30px;
+        }
+        #menu {
+            height: 90px;
+            transform: translateY(30px)
+        }
+      }
+    </style>
+
+    <div id="menu" class="{{direction}}">
+        <div class="wrapper">
+            <div id="what" data-direction$="[[direction]]" on-click="whatClick" class$="menu-item {{getClass('what',targetItem,loading)}}">
+                intro
+                <!-- outline, welcome, abstract, summary, opening, preface -->
+            </div>
+        </div>
+        <div class="wrapper">
+            <div id="when" data-direction$="[[direction]]" on-click="whenClick" class$="menu-item {{getClass('when',targetItem,loading)}}">
+                venue
+                <!-- place, locale, setting, site -->
+            </div>
+        </div>
+        <div class="wrapper">
+            <div id="where" data-direction$="[[direction]]" on-click="whereClick" class$="menu-item {{getClass('where',targetItem,loading)}}">
+                agenda
+                <!-- timeline, itinerary, outline, program, plan, schedule -->
+            </div>
+        </div>
+    </div>
+  </template>
+    <script>
+        Polymer({
+            is: 'mobile-side-menu',
+            behaviors: [
+                Polymer.NeonAnimationRunnerBehavior
+            ],
+            listeners: {
+                'neon-animation-finish': '_onNeonAnimationFinish'
+            },
+            getClass: function(name, target, loading) {
+                if (name == target && !loading) {
+                    return 'large';
+                }
+                return '';
+            },
+            properties: {
+                direction: {
+                    type: String,
+                    value: 'left'
+                },
+                targetItem: {
+                    type: String,
+                    value: 'what'
+                },
+                loading: {
+                    type: Boolean,
+                    value: false
+                },
+                animationConfig: {
+                    value: function() {
+                        var menuContainer = Polymer.dom(this.root).querySelector('#menu');
+                        var whatContainer = Polymer.dom(this.root).querySelector('#what');
+                        var whenContainer = Polymer.dom(this.root).querySelector('#when');
+                        var whereContainer = Polymer.dom(this.root).querySelector('#where');
+                        return {
+                            'when': [{
+                                name: 'transform-animation',
+                                node: whenContainer,
+                                transformTo: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
+                            'when-left': [{
+                                name: 'transform-animation',
+                                node: whenContainer,
+                                transformTo: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
+                            'what': [{
+                                name: 'transform-animation',
+                                node: whatContainer,
+                                transformTo: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
+                            'what-left': [{
+                                name: 'transform-animation',
+                                node: whatContainer,
+                                transformTo: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
+                            'where': [{
+                                name: 'transform-animation',
+                                node: whereContainer,
+                                transformTo: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
+                            'where-left': [{
+                                name: 'transform-animation',
+                                node: whereContainer,
+                                transformTo: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    delay: 1000,
+                                    duration: 500
+                                }
+                            }],
+                            'exit-when': [{
+                                name: 'transform-animation',
+                                node: whenContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-when-left': [{
+                                name: 'transform-animation',
+                                node: whenContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-what': [{
+                                name: 'transform-animation',
+                                node: whatContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-what-left': [{
+                                name: 'transform-animation',
+                                node: whatContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-where': [{
+                                name: 'transform-animation',
+                                node: whereContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(1px)',
+                                transformOrigin: 'right',
+                                timing: {
+                                    duration: 500
+                                }
+                            }],
+                            'exit-where-left': [{
+                                name: 'transform-animation',
+                                node: whereContainer,
+                                transformTo: 'scale(1)',
+                                transformFrom: 'scale(2) translateX(-1px)',
+                                transformOrigin: 'left',
+                                timing: {
+                                    duration: 500
+                                }
+                            }]
+                        }
+                    }
+                }
+            },
+            listeners: {
+                'neon-animation-finish': '_onNeonAnimationFinish'
+            },
+            getClass: function(name, target, loading) {
+                if (name == target && !loading) {
+                    return 'large';
+                }
+                return '';
+            },
+            what: function() {
+                this.deselectItem();
+                this.shiftMenu('what');
+                this.selectItem();
+            },
+            whatClick: function() {
+                this.fire('mobileWhat');
+            },
+            when: function() {
+                this.deselectItem();
+                this.shiftMenu('when');
+                this.selectItem();
+            },
+            whenClick: function() {
+                this.fire('mobileWhen');
+            },
+            where: function() {
+                this.deselectItem();
+                this.shiftMenu('where');
+                this.selectItem();
+            },
+            whereClick: function() {
+                this.fire('mobileWhere');
+            },
+            deselectItem: function() {
+                var animation = 'exit-' + this.targetItem;
+                if(this.direction == 'left')
+                  animation += '-left';
+                this.playAnimation(animation);
+            },
+            selectItem: function() {
+                var animation = this.targetItem;
+                if(this.direction == 'left')
+                  animation += '-left';
+                this.playAnimation(animation);
+            },
+            shiftMenu: function(item) {
+                this.targetItem = item;
+                var targetNode = Polymer.dom(this.root).querySelector('#' + item);
+                var index = Array.prototype.indexOf
+                  .call(targetNode.parentNode.parentNode.childNodes, targetNode.parentNode);
+                index = (index - 1) / 2;
+                var menuNode = Polymer.dom(this.root).querySelector('#menu');
+                var menuHeight = menuNode.clientHeight;
+                var menuMiddle = menuHeight / 2;
+                var elementCount = menuNode.childElementCount;
+                var itemHeight = menuHeight / elementCount;
+                var itemMiddle = itemHeight / 2;
+
+                var distanceFromStart = (index * itemHeight) + itemMiddle;
+                var shiftAmount = menuMiddle - distanceFromStart;
+
+                this.$.menu.style.transform = 'translateY(' + shiftAmount + 'px)';
+                this.loading = true;
+            },
+            _onNeonAnimationFinish: function() {
+                if (this.loading) {
+                    this.loading = false;
+                    var menu = Polymer.dom(this.root).querySelector('#menu');
+                }
+            }
+        });
+    </script>
+</dom-module>
