@@ -82,6 +82,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     #mobile-view {
       display: none;
     }
+    mobile-page-title {
+      display: none;
+    }
   }
 
   /* Viewport is 320px or less ----------- */
@@ -94,6 +97,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     #desktop-view {
+      display: none;
+    }
+    page-title {
       display: none;
     }
   }
@@ -130,7 +136,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         pattern="/:page"
         data="{{routeData}}"
         tail="{{subroute}}"></app-route>
-    <page-title style="display: none;"></page-title>
+    <page-title></page-title>
     <mobile-page-title></mobile-page-title>
     <!--
     <neon-animated-pages id="pages" selected="0" class="horizontal layout center center-justified">

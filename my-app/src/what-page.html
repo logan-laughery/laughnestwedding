@@ -44,6 +44,68 @@
             left: 0;
             bottom: 0;
             right: 0;
+            flex-direction: column;
+            display: flex;
+            justify-content: center;
+        }
+
+        @media only screen and (min-width : 900px) and (max-width : 940px) {
+          :host p {
+            margin: 1px;
+          }
+          :host h2 {
+            margin-top: 0px;
+            margin-bottom: 10px;
+          }
+          :host #day-count {
+            margin-top: 10px;
+          }
+        }
+
+        @media only screen and (min-width : 800px) and (max-width : 900px) {
+          :host p {
+            margin: 1px;
+            font-size: 19px;
+          }
+          :host h2 {
+            margin-top: 0px;
+            margin-bottom: 10px;
+            font-size: 42px;
+          }
+          :host #day-count {
+            margin-top: 10px;
+            font-size: 42px;
+          }
+        }
+
+        @media only screen and (min-width : 730px) and (max-width : 800px) {
+          :host p {
+            font-size: 17px;
+            margin: 1px;
+          }
+          :host h2 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-size: 42px;
+          }
+          :host #day-count {
+            font-size: 42px;
+          }
+        }
+
+        @media only screen and (max-width : 730px) {
+          :host p {
+            font-size: 16px;
+            margin: 1px;
+          }
+          :host h2 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-size: 42px;
+          }
+          :host #day-count {
+            font-size: 42px;
+          }
         }
     </style>
 
@@ -52,15 +114,16 @@
           <div id="firstPage" class="horizontal layout center center-justified page" style="height:100%; width: 50%;">
               <paper-material elevation="2" class="pane" style="background:#91a7d0">
                   <div class="pane-content">
-                      <h2>Welcome</h2>
+                    <h2>Welcome</h2>
+                    <p>
                       We are so excited to be joined by all of you to celebrate
                       the start of our marriage! We cannot think of anyone
                       better to share this special day with. Here you will find
                       details and directions for the ceremony and reception,
                       booking information, as well as our registry.
                       Let the countdown begin!
-                      <br/>
-                      <h2>200 days</h2>
+                    </p>
+                    <h2 id="day-count">200 days</h2>
                   </div>
               </paper-material>
           </div>
