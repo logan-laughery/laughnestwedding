@@ -1,0 +1,57 @@
+<!-- EXTERNAL REFS -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+
+<!-- LOCAL REFS -->
+<link rel="import" href="side-menu.html">
+<link rel="import" href="intro-page.html">
+<link rel="import" href="venue-page.html">
+
+<dom-module id="horz-content">
+  <style>
+    :host {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    :host neon-animated-pages {
+      width: 60%;
+      height: 100%;
+    }
+  </style>
+
+  <template>
+    <page-title></page-title>
+
+    <side-menu id="left"></side-menu>
+
+    <neon-animated-pages id="pages" selected="0">
+      <intro-page></intro-page>
+      <venue-page></venue-page>
+      <intro-page></intro-page>
+    </neon-animated-pages>
+
+    <side-menu id="right" alignleft></side-menu>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'horz-content',
+      changePage: function(e) {
+        console.log('Page Change: ' + e.detail.selected);
+        this.$.left.changeItem(e.detail.selected);
+        this.$.right.changeItem(e.detail.selected);
+        this.$.pages.selected = e.detail.selected;
+      },
+      listeners: {
+        'sideMenuClick': 'changePage'
+      }
+    })
+  </script>
+</dom-module>

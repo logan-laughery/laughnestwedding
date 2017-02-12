@@ -1,0 +1,107 @@
+<!-- EXTERNAL REFS -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+<!-- LOCAL REFS -->
+<link rel="import" href="side-menu-item.html">
+
+<dom-module id="side-menu">
+  <template>
+    <style>
+      :host {
+        transition: .5s;
+        transition-delay: .5s;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+      }
+      :host side-menu-item:first-of-type {
+        transform: scale(2);
+        transform-origin: right;
+      }
+
+      :host([alignleft]) {
+        align-items: flex-start;
+      }
+
+      :host([alignleft]) side-menu-item:first-of-type {
+        transform-origin: left;
+      }
+
+      :host {
+        transform: translateY(30px);
+      }
+
+      :host side-menu-item {
+        height: 30px;
+      }
+      /*side-menu-item {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+      }*/
+    </style>
+
+    <side-menu-item on-click="itemClick" alignleft$="[[alignleft]]" alignleft>intro</side-menu-item>
+    <side-menu-item on-click="itemClick" alignleft$="[[alignleft]]" alignleft>venue</side-menu-item>
+    <side-menu-item on-click="itemClick" alignleft$="[[alignleft]]" alignleft>agenda</side-menu-item>
+
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'side-menu',
+    behaviors: [
+
+    ],
+    properties: {
+      currentMenuItemNode: {
+        type: Object
+      },
+      alignleft: {
+        type: Boolean,
+        value: false
+      }
+    },
+    ready: function() {
+      this.currentMenuItemNode = Polymer.dom(this.root).querySelector('side-menu-item');
+    },
+    itemClick: function(e) {
+      var targetNode = Polymer.dom(e).localTarget;
+      var menuItems = Polymer.dom(this.root).querySelectorAll('side-menu-item');
+      var index = Array.prototype.indexOf
+        .call(menuItems, targetNode);
+      if(targetNode !== this.currentMenuItemNode) {
+        this.fire('sideMenuClick', {selected: index});
+      }
+    },
+    changeItem: function(index) {
+      var targetNode = Polymer.dom(this.root)
+        .querySelectorAll('side-menu-item')[index];
+      this.currentMenuItemNode.exit();
+      this.shiftMenu(this.currentMenuItemNode, targetNode, index);
+      targetNode.entry();
+      this.currentMenuItemNode = targetNode;
+    },
+    shiftMenu: function(currentNode, targetNode, index) {
+      var menuNode = this;
+      var menuHeight = menuNode.clientHeight;
+      var menuMiddle = menuHeight / 2;
+      var elementCount = Polymer.dom(this.root)
+        .querySelectorAll('side-menu-item').length;
+      var itemHeight = menuHeight / elementCount;
+      var itemMiddle = itemHeight / 2;
+
+      var distanceFromStart = (index * itemHeight) + itemMiddle;
+      var shiftAmount = menuMiddle - distanceFromStart;
+
+      this.style.transform = 'translateY(' + shiftAmount + 'px)';
+    }
+  })
+</script>

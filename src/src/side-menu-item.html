@@ -1,0 +1,119 @@
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animation-runner-behavior.html">
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+<dom-module id="side-menu-item">
+  <template>
+    <style>
+      :host {
+        display: inline-block;
+        cursor: pointer;
+        z-index: 4;
+      }
+    </style>
+    <content></content>
+
+  </template>
+</dom-module>
+
+<script>
+
+  Polymer({
+
+    is: 'side-menu-item',
+
+    behaviors: [
+      Polymer.NeonAnimationRunnerBehavior
+    ],
+
+    properties: {
+      alignleft: {
+        type: Boolean,
+        value: false
+      },
+      animationConfig: {
+        type: Object,
+        value: function () {
+          var translationLeft = 'scale(2) translateX(-1px)';
+          var translation = 'scale(2) translate(1px)';
+          var originLeft = 'left';
+          var origin = 'right';
+
+          return {
+            'entry': {
+              name: 'transform-animation',
+              node: this,
+              transformTo: translation,
+              transformOrigin: origin,
+              timing: {
+                delay: 1000,
+                duration: 500
+              }
+            },
+            'entry-left': {
+              name: 'transform-animation',
+              node: this,
+              transformTo: translationLeft,
+              transformOrigin: originLeft,
+              timing: {
+                delay: 1000,
+                duration: 500
+              }
+            },
+            'exit': {
+              name: 'transform-animation',
+              node: this,
+              transformTo: 'scale(1)',
+              transformFrom: translation,
+              transformOrigin: origin,
+              timing: {
+                duration: 500
+              }
+            },
+            'exit-left': {
+              name: 'transform-animation',
+              node: this,
+              transformTo: 'scale(1)',
+              transformFrom: translationLeft,
+              transformOrigin: originLeft,
+              timing: {
+                duration: 500
+              }
+            }
+          }
+        }
+      }
+    },
+
+    entry: function() {
+      if(this.alignleft) {
+        this.playAnimation('entry-left');
+      } else {
+        this.playAnimation('entry');
+      }
+
+      var translation = this.alignleft ? 'scale(2) translateX(-1px)'
+        : 'scale(2) translate(1px)';
+      var origin = this.alignleft ? 'left' : 'right';
+
+      this.style.transform = translation;
+      this.style.transformOrigin = origin;
+      this.style.zIndex = 1;
+    },
+
+    exit: function() {
+      if(this.alignleft) {
+        this.playAnimation('exit-left');
+      } else {
+        this.playAnimation('exit');
+      }
+
+      this.style.transform = 'initial';
+      this.style.zIndex = '';
+    }
+
+  });
+
+</script>

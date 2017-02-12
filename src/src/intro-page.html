@@ -1,0 +1,76 @@
+<!-- EXTERNAL REFS -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<!-- LOCAL REFS -->
+<link rel="import" href="animation-pane.html">
+<link rel="import" href="horizontal-pane.html">
+
+
+<dom-module id="intro-page">
+  <style>
+    :host {
+      height: 100%;
+      flex-direction: row;
+      display: flex;
+      overflow: hidden;
+    }
+
+    :host horizontal-pane {
+      width: 50%;
+    }
+
+    :host horizontal-pane img {
+      height: 100%;
+    }
+  </style>
+
+  <template>
+    <horizontal-pane id="left">
+      <h2>Welcome</h2>
+      <p>
+        We are so excited to be joined by all of you to celebrate
+        the start of our marriage! We cannot think of anyone
+        better to share this special day with. Here you will find
+        details and directions for the ceremony and reception,
+        booking information, as well as our registry.
+        Let the countdown begin!
+      </p>
+      <h2 id="day-count">200 days</h2>
+    </horizontal-pane>
+    <horizontal-pane id="right">
+      <img src="/images/intro-image.jpg" />
+    </horizontal-pane>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'intro-page',
+      behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior
+      ],
+      properties: {
+          animationConfig: {
+              value: function() {
+                  var left = this.$.left;
+                  var right = this.$.right;
+                  return {
+                      'entry': [
+                        {animatable: left, type: 'from-top'},
+                        {animatable: right, type: 'from-bottom'}
+                      ],
+                      'exit': [
+                        {animatable: left, type: 'to-bottom'},
+                        {animatable: right, type: 'to-top'}
+                      ]
+                  }
+              }
+          }
+      }
+    })
+  </script>
+</dom-module>

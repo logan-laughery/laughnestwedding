@@ -1,0 +1,68 @@
+<!-- EXTERNAL REFS -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+
+<!-- LOCAL REFS -->
+<link rel="import" href="animation-pane.html">
+
+<dom-module id="vertical-pane">
+  <style>
+    .inner {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      background-color: var(--horizontal-pane-background-color, #91a7d0);
+    }
+    .outter {
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+    .content-wrapper {
+      overflow: hidden;
+    }
+  </style>
+
+  <template>
+    <style include="iron-flex"></style>
+    <animation-pane class="outter" id="content">
+      <paper-material elevation="2" class="inner">
+        <div class="content-wrapper">
+          <content>
+          </content>
+        </div>
+      </paper-material>
+    </animation-pane>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'vertical-pane',
+      behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior
+      ],
+      properties: {
+          animationConfig: {
+              value: function() {
+                  var content = this.$.content;
+                  return {
+                      'from-top': [{animatable: content, type: 'from-top'}],
+                      'from-bottom': [{animatable: content, type: 'from-bottom'}],
+                      'to-bottom': [{animatable: content, type: 'to-bottom'}],
+                      'to-top': [{animatable: content, type: 'to-top'}]
+                  }
+              }
+          }
+      }
+    })
+  </script>
+</dom-module>

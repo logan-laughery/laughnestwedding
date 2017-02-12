@@ -1,0 +1,68 @@
+<!-- EXTERNAL REFS -->
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
+<link rel="import" href="../bower_components/neon-animation/neon-animations.html">
+<link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+
+<!-- LOCAL REFS -->
+<link rel="import" href="animation-pane.html">
+
+<dom-module id="animation-pane">
+  <style>
+    :host {
+      display: inline-block;
+    }
+  </style>
+
+  <template>
+    <content>
+    </content>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'animation-pane',
+      behaviors: [
+          Polymer.NeonSharedElementAnimatableBehavior
+      ],
+      properties: {
+          animationConfig: {
+              value: function() {
+                  return {
+                      'from-top': [{
+                          name: 'transform-animation',
+                          node: this,
+                          transformFrom: 'translateY(-' + '100' + '%)',
+                          transformTo: 'none',
+                          timing: {
+                              delay: 1,
+                              duration: 1000
+                          }
+                      }],
+                      'from-bottom': [{
+                          name: 'slide-from-bottom-animation',
+                          node: this,
+                          timing: {
+                              delay: 1,
+                              duration: 1000
+                          }
+                      }],
+                      'to-bottom': [{
+                          name: 'transform-animation',
+                          node: this,
+                          transformFrom: 'none',
+                          transformTo: 'translateY(100%)'
+                      }],
+                      'to-top': [{
+                          name: 'slide-up-animation',
+                          node: this
+                      }]
+                  }
+              }
+          }
+      }
+    })
+  </script>
+</dom-module>
