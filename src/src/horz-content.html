@@ -9,6 +9,7 @@
 <link rel="import" href="side-menu.html">
 <link rel="import" href="intro-page.html">
 <link rel="import" href="venue-page.html">
+<link rel="import" href="agenda-page.html">
 
 <dom-module id="horz-content">
   <style>
@@ -24,6 +25,48 @@
       width: 60%;
       height: 100%;
     }
+
+    /* Viewport is 700px or less ----------- */
+    @media only screen and (max-width : 700px) {
+      #right {
+        display: none;
+      }
+      side-menu {
+        font-size: 11px;
+        width: 70px;
+      }
+      :host neon-animated-pages {
+        width: 100%;
+      }
+    }
+
+    /* Viewport is 321px or more ----------- */
+    @media only screen and (min-width : 701px) {
+      neon-animated-pages {
+        width: 70%;
+      }
+    }
+
+    /* Viewport is 320px or less ----------- */
+    @media only screen and (max-width : 700px) {
+      neon-animated-pages {
+        width: 80%;
+      }
+    }
+
+    /* Desktops and laptops ----------- */
+    @media only screen  and (min-width : 1000px) {
+      neon-animated-pages {
+        width: 80%;
+      }
+    }
+
+    /* Desktops and laptops ----------- */
+    @media only screen  and (min-width : 1360px) {
+      neon-animated-pages {
+        width: 1080px;
+      }
+    }
   </style>
 
   <template>
@@ -34,7 +77,7 @@
     <neon-animated-pages id="pages" selected="0">
       <intro-page></intro-page>
       <venue-page></venue-page>
-      <intro-page></intro-page>
+      <agenda-page></agenda-page>
     </neon-animated-pages>
 
     <side-menu id="right" alignleft></side-menu>

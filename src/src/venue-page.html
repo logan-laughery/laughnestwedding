@@ -5,6 +5,7 @@
 <link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html">
 <link rel="import" href="../bower_components/neon-animation/neon-animations.html">
 <link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
 
 <!-- LOCAL REFS -->
 <link rel="import" href="animation-pane.html">
@@ -29,10 +30,31 @@
     :host vertical-pane img {
       height: 100%;
     }
+
+    :host {
+      --layout-fit: {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-position-y: top !important;
+      }
+    }
+
+    :host iron-image {
+      width: 100%;
+      --iron-image-width: 100%;
+      height: 100%;
+      --iron-image-height: 100%;
+    }
   </style>
 
   <template>
-    <vertical-pane id="left">
+    <vertical-pane id="top">
+      <iron-image src="/images/intro-image.jpg" sizing="cover"></iron-image>
+    </vertical-pane>
+    <vertical-pane id="bottom">
       <h2>Welcome</h2>
       <p>
         We are so excited to be joined by all of you to celebrate
@@ -43,9 +65,6 @@
         Let the countdown begin!
       </p>
       <h2 id="day-count">200 days</h2>
-    </vertical-pane>
-    <vertical-pane id="right">
-      <img src="/images/intro-image.jpg" />
     </vertical-pane>
   </template>
 
@@ -58,16 +77,16 @@
       properties: {
           animationConfig: {
               value: function() {
-                  var left = this.$.left;
-                  var right = this.$.right;
+                  var top = this.$.top;
+                  var bottom = this.$.bottom;
                   return {
                       'entry': [
-                        {animatable: left, type: 'from-top'},
-                        {animatable: right, type: 'from-bottom'}
+                        {animatable: top, type: 'from-top'},
+                        {animatable: bottom, type: 'from-bottom'}
                       ],
                       'exit': [
-                        {animatable: left, type: 'to-bottom'},
-                        {animatable: right, type: 'to-top'}
+                        {animatable: top, type: 'to-top'},
+                        {animatable: bottom, type: 'to-bottom'}
                       ]
                   }
               }
