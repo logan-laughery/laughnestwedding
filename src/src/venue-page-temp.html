@@ -14,13 +14,17 @@
 <link rel="import" href="vertical-pane.html">
 
 
-<dom-module id="agenda-page">
+<dom-module id="venue-page-temp">
   <style>
     :host {
       height: 100%;
       flex-direction: column;
       display: flex;
       overflow: hidden;
+    }
+
+    :host .pane-content {
+        background-color: #f4b794;
     }
 
     :host vertical-pane {
@@ -35,6 +39,7 @@
 
     :host horizontal-pane img {
       height: 100%;
+      width: 100%;
     }
 
     :host vertical-pane img {
@@ -79,7 +84,7 @@
 
     .pane-content h2{
       margin: 0px;
-      margin-top: 8px;
+      margin-top: 0px;
       margin-bottom: 8px;
     }
 
@@ -129,14 +134,14 @@
       }
     }
 
-    /* Viewport is 350px or less ----------- */
+    /* Viewport is 349px or less ----------- */
     @media only screen and (max-width : 349px) {
       .pane-content p {
         font-size: 12px;
       }
     }
 
-    /* Viewport is 350px or less ----------- */
+    /* Viewport is landscape and 1 to 349px ----------- */
     @media only screen and (max-height : 349px)
      and (orientation: landscape) and (min-height: 1px) {
       .pane-content p {
@@ -147,7 +152,7 @@
       }
     }
 
-    /* Viewport is 360px or less ----------- */
+    /* Viewport is 350 to 361px ----------- */
     @media only screen and (max-width : 361px)
       and (min-width : 350px) {
       .pane-content p {
@@ -155,7 +160,7 @@
       }
     }
 
-    /* Viewport is 350px or less ----------- */
+    /* Viewport is landscape and 350 to 361px  ----------- */
     @media only screen and (max-height : 361px)
      and (orientation: landscape) and (min-height: 350px) {
       .pane-content p {
@@ -166,7 +171,7 @@
       }
     }
 
-    /* Viewport is 420px or less ----------- */
+    /* Viewport is 361 to 701px ----------- */
     @media only screen and (max-width : 701px)
       and (min-width : 361px) {
       .pane-content p {
@@ -177,7 +182,7 @@
       }
     }
 
-    /* Viewport is 350px or less ----------- */
+    /* Viewport is landscape and 361 to 701px ----------- */
     @media only screen and (max-height : 701px)
      and (orientation: landscape) and (min-height: 361px) {
       .pane-content p {
@@ -188,14 +193,39 @@
       }
     }
 
-    /* Viewport is 420px or less ----------- */
-    @media only screen and (max-width : 1000px)
+    /* Viewport is 701 to 1000px ----------- */
+    @media only screen and (max-width : 900px)
       and (min-width : 701px) {
       .pane-content p {
-        font-size: 14px;
+        font-size: 13px;
       }
       .pane-content h2 {
-        font-size: 28px;
+        font-size: 25px;
+      }
+    }
+
+    /* Viewport is 701 to 1000px ----------- */
+    @media only screen and (max-width : 1000px)
+      and (min-width : 801px) {
+      .pane-content p {
+        font-size: 16px;
+      }
+      .pane-content h2 {
+        font-size: 25px;
+      }
+    }
+
+    @media only screen and (max-width: 100000px)
+      and (min-width: 1001px){
+      .pane-content p {
+        font-size: 24px;
+      }
+      .pane-content h2 {
+        font-size: 40px;
+      }
+      .pane-content {
+        padding-left: 18px;
+        padding-right: 18px;
       }
     }
 
@@ -215,45 +245,73 @@
   <template>
     <horizontal-pane class="hidden-sm display-ls" id="left">
       <div class="pane-content">
-        <h2>Welcome</h2>
-        <p>
-          We are so excited to be joined by all of you to celebrate
-          the start of our marriage! We cannot think of anyone
-          better to share this special day with. Here you will find
-          details and directions for the ceremony and reception,
-          booking information, as well as our registry.
-          Let the countdown begin!
-        </p>
-        <h2 id="day-count">200 days</h2>
+        <div>
+          <h2>Ceremony</h2>
+          <p>
+            Faith Lutheran Church
+            <br/>
+            10395 University Ave
+            <br/>
+            Clive, IA 50325
+            <br/>
+            <a href="https://goo.gl/maps/R2p74qx1cmQ2">Google Maps</a>
+          </p>
+        </div>
+        <div>
+          <h2>Reception</h2>
+          <p>
+            Holiday Inn
+            <br/>
+            1050 6th Ave
+            <br/>
+            Des Moines, IA 50314
+            <br/>
+            <a href="https://goo.gl/maps/R2p74qx1cmQ2">Google Maps</a>
+          </p>
+        </div>
     </div>
     </horizontal-pane>
 
     <horizontal-pane class="hidden-sm display-ls" id="right">
-      <img src="/images/intro-image.jpg"></img>
+      <img src="/images/field.jpg"></img>
     </horizontal-pane>
 
     <vertical-pane class="hidden-lg hidden-ls top" id="top">
-      <iron-image src="/images/intro-image.jpg" sizing="cover"></iron-image>
+      <iron-image src="/images/field.jpg" sizing="cover"></iron-image>
     </vertical-pane>
     <vertical-pane class="hidden-lg hidden-ls bottom" id="bottom">
       <div class="pane-content">
-        <h2>Welcome</h2>
-        <p>
-          We are so excited to be joined by all of you to celebrate
-          the start of our marriage! We cannot think of anyone
-          better to share this special day with. Here you will find
-          details and directions for the ceremony and reception,
-          booking information, as well as our registry.
-          Let the countdown begin!
-        </p>
-        <h2>200 days</h2>
+        <div>
+          <h2>Ceremony</h2>
+          <p>
+            Faith Lutheran Church
+            <br/>
+            10395 University Ave
+            <br/>
+            Clive, IA 50325
+            <br/>
+            <a href="https://goo.gl/maps/R2p74qx1cmQ2">Google Maps</a>
+          </p>
+        </div>
+        <div>
+          <h2>Reception</h2>
+          <p>
+            Holiday Inn
+            <br/>
+            1050 6th Ave
+            <br/>
+            Des Moines, IA 50314
+            <br/>
+            <a href="https://goo.gl/maps/R2p74qx1cmQ2">Google Maps</a>
+          </p>
+        </div>
       </div>
     </vertical-pane>
   </template>
 
   <script>
     Polymer({
-      is: 'agenda-page',
+      is: 'venue-page-temp',
       behaviors: [
           Polymer.NeonSharedElementAnimatableBehavior
       ],

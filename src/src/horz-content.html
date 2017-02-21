@@ -8,7 +8,7 @@
 <!-- LOCAL REFS -->
 <link rel="import" href="side-menu.html">
 <link rel="import" href="intro-page.html">
-<link rel="import" href="venue-page.html">
+<link rel="import" href="venue-page-temp.html">
 <link rel="import" href="agenda-page.html">
 <link rel="import" href="page-title.html">
 
@@ -25,7 +25,7 @@
     :host page-title {
       position: fixed;
       top: 0;
-      left: 0;
+      left: 12px;
     }
 
     :host neon-animated-pages {
@@ -44,6 +44,11 @@
       }
       :host neon-animated-pages {
         width: 100%;
+      }
+      :host page-title {
+        position: fixed;
+        top: 0;
+        left: 4px;
       }
     }
 
@@ -83,7 +88,7 @@
 
     <neon-animated-pages id="pages" selected="0">
       <intro-page></intro-page>
-      <venue-page></venue-page>
+      <venue-page-temp></venue-page-temp>
       <agenda-page></agenda-page>
     </neon-animated-pages>
 
