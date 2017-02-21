@@ -10,6 +10,7 @@
 <link rel="import" href="intro-page.html">
 <link rel="import" href="venue-page.html">
 <link rel="import" href="agenda-page.html">
+<link rel="import" href="page-title.html">
 
 <dom-module id="horz-content">
   <style>
@@ -19,6 +20,12 @@
       align-items: center;
       flex-direction: row;
       justify-content: center;
+    }
+
+    :host page-title {
+      position: fixed;
+      top: 0;
+      left: 0;
     }
 
     :host neon-animated-pages {
