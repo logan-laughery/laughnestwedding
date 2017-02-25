@@ -163,6 +163,9 @@
       .pane-content p {
         font-size: 12px;
       }
+      .agenda-item {
+        font-size: 14px;
+      }
     }
 
     /* Viewport is landscape and 1 to 349px ----------- */
@@ -170,6 +173,9 @@
      and (orientation: landscape) and (min-height: 1px) {
       .pane-content p {
         font-size: 12px !important;
+      }
+      .agenda-item {
+        font-size: 10px !important;
       }
       .pane-content h2 {
         font-size: 26px;
@@ -182,6 +188,9 @@
       .pane-content p {
         font-size: 15px;
       }
+      .agenda-item {
+        font-size: 13px;
+      }
     }
 
     /* Viewport is landscape and 350 to 361px  ----------- */
@@ -189,6 +198,9 @@
      and (orientation: landscape) and (min-height: 350px) {
       .pane-content p {
         font-size: 14px !important;
+      }
+      .agenda-item {
+        font-size: 12px !important;
       }
       .pane-content h2 {
         font-size: 26px;
@@ -201,6 +213,9 @@
       .pane-content p {
         font-size: 16px;
       }
+      .agenda-item {
+        font-size: 14px;
+      }
       .pane-content h2 {
         font-size: 28px;
       }
@@ -211,6 +226,9 @@
      and (orientation: landscape) and (min-height: 361px) {
       .pane-content p {
         font-size: 14px !important;
+      }
+      .agenda-item {
+        font-size: 12px !important;
       }
       .pane-content h2 {
         font-size: 26px;
@@ -223,6 +241,9 @@
       .pane-content p {
         font-size: 13px;
       }
+      .agenda-item {
+        font-size: 11px;
+      }
       .pane-content h2 {
         font-size: 25px;
       }
@@ -234,6 +255,9 @@
       .pane-content p {
         font-size: 16px;
       }
+      .agenda-item {
+        font-size: 14px;
+      }
       .pane-content h2 {
         font-size: 25px;
       }
@@ -242,10 +266,13 @@
     @media only screen and (max-width: 100000px)
       and (min-width: 1001px){
       .pane-content p {
-        font-size: 24px;
+        font-size: 22px;
+      }
+      .agenda-item {
+        font-size: 20px;
       }
       .pane-content h2 {
-        font-size: 40px;
+        font-size: 38px;
       }
       .pane-content {
         padding-left: 18px;
@@ -265,11 +292,6 @@
       };
     }
 
-    .agenda-item {
-      display: flex;
-      flex-direction: row;
-    }
-
     .time {
     }
   </style>
@@ -281,31 +303,36 @@
         <hr/>
         <div>
           <p>
-            3:30&nbsp;&nbsp;-&nbsp;Ceremony
+            <strong>3:30&nbsp;&nbsp;-&nbsp;Ceremony</strong>
           </p>
-          Following the ceremony, guests can begin to make their way
-          to the reception.  Feel free to grab
-          a drink at the hotel bar or visit nearby
-          <a href="https://www.google.com/maps/place/Smokey+Row+Coffee+Co./@41.5959672,-93.63721,15.5z/data=!4m5!3m4!1s0x0:0x1522c602ffacd57c!8m2!3d41.5934497!4d-93.6429561">
-            Smokey Row
-          </a> for a cup of coffee before the reception begins.
-        </div>
-
-
-        <div>
-          <p>
-            5:00&nbsp;&nbsp;-&nbsp;Reception
-          </p>
-          The reception will occur on the top floor of the Downtown
-          Des Moines Holiday Inn.
+          <div class="agenda-item">
+            Following the ceremony, guests can begin to make their way
+            to the reception.  Feel free to grab
+            a drink at the hotel bar or visit nearby
+            <a href="https://www.google.com/maps/place/Smokey+Row+Coffee+Co./@41.5959672,-93.63721,15.5z/data=!4m5!3m4!1s0x0:0x1522c602ffacd57c!8m2!3d41.5934497!4d-93.6429561">
+              Smokey Row
+            </a>
+            for a cup of coffee before the reception begins.
+          </div>
         </div>
 
         <div>
           <p>
-            6:00&nbsp;&nbsp;-&nbsp;Dinner
+            <strong>5:00&nbsp;&nbsp;-&nbsp;Reception</strong>
           </p>
-          Cards for submitting an RSVP will be mailed at a later date.
-          You may RSVP early by responding here.
+          <div class="agenda-item">
+            The reception will occur on the top floor of the Downtown
+            Des Moines Holiday Inn.
+          </div>
+        </div>
+
+        <div>
+          <p>
+            <strong>6:00&nbsp;&nbsp;-&nbsp;Dinner</strong>
+          </p>
+          <div class="agenda-item">
+            Cards for submitting an RSVP will be mailed at a later date.
+          </div>
         </div>
 
     </div>
@@ -369,18 +396,43 @@
     </vertical-pane>
     <vertical-pane class="hidden-lg hidden-ls bottom" id="bottom">
       <div class="pane-content">
-        <h2>Welcome</h2>
+        <h2>Agenda</h2>
         <hr/>
-        <p>
-          We are so excited to be joined by all of you to celebrate
-          the start of our marriage! We cannot think of anyone
-          better to share this special day with. Here you will find
-          details and directions for the ceremony and reception,
-          booking information, as well as our registry.
-          Let the countdown begin!
-        </p>
-        <h2>200 days</h2>
-      </div>
+        <div>
+          <p>
+            <strong>3:30&nbsp;&nbsp;-&nbsp;Ceremony</strong>
+          </p>
+          <div class="agenda-item">
+            Following the ceremony, guests can begin to make their way
+            to the reception.  Feel free to grab
+            a drink at the hotel bar or visit nearby
+            <a href="https://www.google.com/maps/place/Smokey+Row+Coffee+Co./@41.5959672,-93.63721,15.5z/data=!4m5!3m4!1s0x0:0x1522c602ffacd57c!8m2!3d41.5934497!4d-93.6429561">
+              Smokey Row
+            </a>
+            for a cup of coffee before the reception begins.
+          </div>
+        </div>
+
+        <div>
+          <p>
+            <strong>5:00&nbsp;&nbsp;-&nbsp;Reception</strong>
+          </p>
+          <div class="agenda-item">
+            The reception will occur on the top floor of the Downtown
+            Des Moines Holiday Inn.
+          </div>
+        </div>
+
+        <div>
+          <p>
+            <strong>6:00&nbsp;&nbsp;-&nbsp;Dinner</strong>
+          </p>
+          <div class="agenda-item">
+            Cards for submitting an RSVP will be mailed at a later date.
+          </div>
+        </div>
+
+    </div>
     </vertical-pane>
   </template>
 
