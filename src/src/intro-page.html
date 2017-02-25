@@ -13,6 +13,7 @@
 <link rel="import" href="horizontal-pane.html">
 <link rel="import" href="vertical-pane.html">
 
+<!-- Used http://www.fotor.com/  for images -->
 
 <dom-module id="intro-page">
   <style>
@@ -21,6 +22,39 @@
       flex-direction: column;
       display: flex;
       overflow: hidden;
+      text-align: center;
+    }
+
+    /* 2017 - Light
+      #d5e1df
+      #d6cbd3
+      #bdcebe
+      #e3eaa7
+    */
+
+    /* 2017 - Analogous
+      #86af49
+      #817397
+      #b88bac
+      #d57f70
+      #dcb967 +
+      #ac9897
+      #af8c90
+      #f0e1ce
+    */
+
+    /* 2016
+      #ffd3bf
+      #d1c2ab
+      #a8bba2
+      #f6cac9
+      #c3ddd6
+      #d1c3d5
+    */
+
+
+    :host .pane-content {
+      background-color: #91a7d0;
     }
 
     :host vertical-pane {
@@ -260,22 +294,21 @@
         <p>
           Here you will find
           details and directions for the ceremony and reception,
-          booking information, as well as our registry.
-        </p>
-        <p>
-          Let the countdown begin!
+          booking information, as well as our registry.  Please
+          be sure to save the date!
         </p>
         <hr/>
-        <h2 id="day-count">200 days</h2>
+        <h2>9 / 2 / 2017</h2>
+      </div>
     </div>
     </horizontal-pane>
 
     <horizontal-pane class="hidden-sm display-ls" id="right">
-      <img src="/images/intro-image.jpg"></img>
+      <img src="/images/14-red-ochre.png"></img>
     </horizontal-pane>
 
     <vertical-pane class="hidden-lg hidden-ls top" id="top">
-      <iron-image src="/images/intro-image.jpg" sizing="cover"></iron-image>
+      <iron-image src="/images/14-red-ochre.png" sizing="cover"></iron-image>
     </vertical-pane>
     <vertical-pane class="hidden-lg hidden-ls bottom" id="bottom">
       <div class="pane-content">
@@ -290,13 +323,11 @@
         <p>
           Here you will find
           details and directions for the ceremony and reception,
-          booking information, as well as our registry.
-        </p>
-        <p>
-          Let the countdown begin!
+          booking information, as well as our registry.  Please
+          be sure to save the date!
         </p>
         <hr/>
-        <h2>200 days</h2>
+        <h2>9 / 2 / 2017</h2>
       </div>
     </vertical-pane>
   </template>

@@ -21,6 +21,7 @@
       flex-direction: column;
       display: flex;
       overflow: hidden;
+      text-align: center;
     }
 
     :host vertical-pane {
@@ -42,6 +43,13 @@
       height: 100%;
     }
 
+    :host hr {
+      border-color: rgba(0, 0, 0, 0.26);
+      width: 100%;
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
     :host {
       --layout-fit: {
         position: absolute;
@@ -59,17 +67,38 @@
       height: 100%;
       --iron-image-height: 100%;
     }
-
+    /* 2017 - Analogous
+      #86af49
+      #817397
+      #b88bac
+      #d57f70
+      #dcb967
+      #ac9897
+      #af8c90
+      #f0e1ce
+    */
     .pane-content {
       padding: 4px;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
+      /*
+        #b3ca91
+        #dda79d
+        #db998e
+      */
+      background-color: #d88d80;
+    }
+
+    :host a {
+      color: #005BAC;
+      text-decoration: none;
     }
 
     :host h2 {
       font-family: 'Oswald', sans-serif;
+      font-weight: 100;
     }
 
     .pane-content p {
@@ -235,44 +264,113 @@
         padding-bottom: 34px;
       };
     }
+
+    .agenda-item {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .time {
+    }
   </style>
 
   <template>
     <horizontal-pane class="hidden-sm display-ls" id="left">
       <div class="pane-content">
         <h2>Agenda</h2>
-        <p>
-          3:30 - Ceremony
-        </p>
-        <p>
-          Do stuff
-        </p>
-        <p>
-          5:00 - Reception
-        </p>
-        <p>
-          6:00 - Dinner
-        </p>
-        <p>
-          7:00 - Dance
-        </p>
-        <p>
+        <hr/>
+        <div>
+          <p>
+            3:30&nbsp;&nbsp;-&nbsp;Ceremony
+          </p>
+          Following the ceremony, guests can begin to make their way
+          to the reception.  Feel free to grab
+          a drink at the hotel bar or visit nearby
+          <a href="https://www.google.com/maps/place/Smokey+Row+Coffee+Co./@41.5959672,-93.63721,15.5z/data=!4m5!3m4!1s0x0:0x1522c602ffacd57c!8m2!3d41.5934497!4d-93.6429561">
+            Smokey Row
+          </a> for a cup of coffee before the reception begins.
+        </div>
 
-        </p>
-        <h2 id="day-count">200 days</h2>
+
+        <div>
+          <p>
+            5:00&nbsp;&nbsp;-&nbsp;Reception
+          </p>
+          The reception will occur on the top floor of the Downtown
+          Des Moines Holiday Inn.
+        </div>
+
+        <div>
+          <p>
+            6:00&nbsp;&nbsp;-&nbsp;Dinner
+          </p>
+          Cards for submitting an RSVP will be mailed at a later date.
+          You may RSVP early by responding here.
+        </div>
+
     </div>
+      <!-- <div class="pane-content">
+        <h2>Agenda</h2>
+        <hr/>
+        <div class="agenda-item">
+          <p class="time">
+            3:30&nbsp;&nbsp;-&nbsp;
+          </p>
+          <div>
+            <p>
+              Ceremony
+            </p>
+            <div class="subtext">
+              Following the ceremony, guests can begin to make their way
+              to the reception.  There will likely be a 40 minute break before
+              the reception starts so find something to do.
+            </div>
+          </div>
+        </div>
+
+        <div class="agenda-item">
+          <p class="time">
+            5:00&nbsp;&nbsp;-&nbsp;
+          </p>
+          <div>
+            <p>
+              Reception
+            </p>
+            <div class="subtext">
+              The reception will occur on the top floor of the Downtown
+              Des Moines Holiday Inn.
+            </div>
+          </div>
+        </div>
+
+        <div class="agenda-item">
+          <p class="time">
+            6:00&nbsp;&nbsp;-&nbsp;
+          </p>
+          <div>
+            <p>
+              Dinner
+            </p>
+            <div class="subtext">
+              Cards for submitting an RSVP will be mailed at a later date.
+              You may RSVP early by responding here.
+            </div>
+          </div>
+        </div>
+    </div> -->
     </horizontal-pane>
 
     <horizontal-pane class="hidden-sm display-ls" id="right">
-      <img src="/images/intro-image.jpg"></img>
+      <img src="/images/22-red-ochre.png"></img>
     </horizontal-pane>
 
     <vertical-pane class="hidden-lg hidden-ls top" id="top">
-      <iron-image src="/images/intro-image.jpg" sizing="cover"></iron-image>
+      <iron-image src="/images/22-red-ochre.png" sizing="cover"></iron-image>
     </vertical-pane>
     <vertical-pane class="hidden-lg hidden-ls bottom" id="bottom">
       <div class="pane-content">
         <h2>Welcome</h2>
+        <hr/>
         <p>
           We are so excited to be joined by all of you to celebrate
           the start of our marriage! We cannot think of anyone
