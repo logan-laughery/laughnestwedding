@@ -6,6 +6,7 @@
 <link rel="import" href="../bower_components/neon-animation/neon-animations.html">
 <link rel="import" href="../bower_components/neon-animation/neon-shared-element-animatable-behavior.html">
 <link rel="import" href="../bower_components/iron-image/iron-image.html">
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
 
 <!-- LOCAL REFS -->
 <link rel="import" href="animation-pane.html">
@@ -22,9 +23,23 @@
       overflow: hidden;
     }
 
+    :host .pane-content {
+      background-color: #f4b794;
+    }
+
     :host vertical-pane {
       width: 100%;
       height: 50%;
+    }
+
+    :host horizontal-pane {
+      width: 50%;
+      height: 100%;
+    }
+
+    :host horizontal-pane img {
+      height: 100%;
+      width: 100%;
     }
 
     :host vertical-pane img {
@@ -48,23 +63,270 @@
       height: 100%;
       --iron-image-height: 100%;
     }
+
+    .pane-content {
+      padding-left: 14px;
+      padding-right: 14px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    :host h2 {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 100;
+      margin-top: 0px;
+    }
+
+    :host a {
+      color: #005BAC;
+      text-decoration: none;
+    }
+
+    :host hr {
+      border-color: rgba(0, 0, 0, 0.26);
+    }
+
+    .pane-content p {
+      margin-top: 0px;
+      margin-bottom: 0px;
+    }
+
+    .pane-content h2{
+      margin: 0px;
+      margin-top: 0px;
+      margin-bottom: 8px;
+    }
+
+    .hidden-sm {
+      display: initial;
+    }
+
+    .hidden-lg {
+      display: initial;
+    }
+    /* Viewport is 701px or more ----------- */
+    @media only screen and (min-width : 701px) {
+      .hidden-lg {
+        display: none;
+      }
+
+      :host {
+        flex-direction: row;
+      }
+    }
+
+    @media only screen and (orientation: portrait) {
+      .hidden-pt {
+        display: none;
+      }
+      .display-pt {
+        display: initial !important;
+      }
+    }
+
+    @media only screen and (orientation: landscape) {
+      .hidden-ls {
+        display: none;
+      }
+      .display-ls {
+        display: initial !important;
+      }
+      :host {
+        flex-direction: row;
+      }
+    }
+
+    /* Viewport is 700px or less ----------- */
+    @media only screen and (max-width : 700px) {
+      .hidden-sm {
+        display: none;
+      }
+    }
+
+    /* Viewport is 349px or less ----------- */
+    @media only screen and (max-width : 349px) {
+      .pane-content p {
+        font-size: 12px;
+      }
+    }
+
+    /* Viewport is landscape and 1 to 349px ----------- */
+    @media only screen and (max-height : 349px)
+     and (orientation: landscape) and (min-height: 1px) {
+      .pane-content p {
+        font-size: 12px !important;
+      }
+      .pane-content h2 {
+        font-size: 26px;
+      }
+    }
+
+    /* Viewport is 350 to 361px ----------- */
+    @media only screen and (max-width : 361px)
+      and (min-width : 350px) {
+      .pane-content p {
+        font-size: 15px;
+      }
+    }
+
+    /* Viewport is landscape and 350 to 361px  ----------- */
+    @media only screen and (max-height : 361px)
+     and (orientation: landscape) and (min-height: 350px) {
+      .pane-content p {
+        font-size: 14px !important;
+      }
+      .pane-content h2 {
+        font-size: 26px;
+      }
+    }
+
+    /* Viewport is 361 to 701px ----------- */
+    @media only screen and (max-width : 701px)
+      and (min-width : 361px) {
+      .pane-content p {
+        font-size: 16px;
+      }
+      .pane-content h2 {
+        font-size: 28px;
+      }
+    }
+
+    /* Viewport is landscape and 361 to 701px ----------- */
+    @media only screen and (max-height : 701px)
+     and (orientation: landscape) and (min-height: 361px) {
+      .pane-content p {
+        font-size: 14px !important;
+      }
+      .pane-content h2 {
+        font-size: 26px;
+      }
+    }
+
+    /* Viewport is 701 to 1000px ----------- */
+    @media only screen and (max-width : 900px)
+      and (min-width : 701px) {
+      .pane-content p {
+        font-size: 13px;
+      }
+      .pane-content h2 {
+        font-size: 25px;
+      }
+    }
+
+    /* Viewport is 701 to 1000px ----------- */
+    @media only screen and (max-width : 1000px)
+      and (min-width : 801px) {
+      .pane-content p {
+        font-size: 16px;
+      }
+      .pane-content h2 {
+        font-size: 25px;
+      }
+    }
+
+    @media only screen and (max-width: 100000px)
+      and (min-width: 1001px){
+      .pane-content p {
+        font-size: 24px;
+      }
+      .pane-content h2 {
+        font-size: 40px;
+      }
+      .pane-content {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+    }
+
+    .top {
+      --vertical-pane-spacing: {
+        padding-top: 34px;
+      };
+    }
+
+    .bottom {
+      --vertical-pane-spacing: {
+        padding-bottom: 34px;
+      };
+    }
   </style>
 
   <template>
-    <vertical-pane id="top">
-      <iron-image src="/images/intro-image.jpg" sizing="cover"></iron-image>
+    <horizontal-pane class="hidden-sm display-ls" id="left">
+      <div class="pane-content">
+        <div>
+          <h2>Ceremony</h2>
+          <hr/>
+          <p>
+            Faith Lutheran Church
+            <br/>
+            10395 University Ave
+            <br/>
+            Clive, IA 50325
+            <br/>
+            <a href="https://goo.gl/maps/R2p74qx1cmQ2">Google Maps</a>
+          </p>
+        </div>
+        <div>
+          <h2>Reception</h2>
+          <hr/>
+          <p>
+            Holiday Inn
+            <br/>
+            1050 6th Ave
+            <br/>
+            Des Moines, IA 50314
+            <br/>
+            <a href="https://goo.gl/maps/R2p74qx1cmQ2">Google Maps</a>
+            <br/>
+            <br/>
+            Call <a href="tel:+5152830151">515.283.0151</a> to reserve a room
+          </p>
+        </div>
+    </div>
+    </horizontal-pane>
+
+    <horizontal-pane class="hidden-sm display-ls" id="right">
+      <img src="/images/field.jpg"></img>
+    </horizontal-pane>
+
+    <vertical-pane class="hidden-lg hidden-ls top" id="top">
+      <iron-image src="/images/field.jpg" sizing="cover"></iron-image>
     </vertical-pane>
-    <vertical-pane id="bottom">
-      <h2>Welcome</h2>
-      <p>
-        We are so excited to be joined by all of you to celebrate
-        the start of our marriage! We cannot think of anyone
-        better to share this special day with. Here you will find
-        details and directions for the ceremony and reception,
-        booking information, as well as our registry.
-        Let the countdown begin!
-      </p>
-      <h2 id="day-count">200 days</h2>
+    <vertical-pane class="hidden-lg hidden-ls bottom" id="bottom">
+      <div class="pane-content">
+        <div>
+          <h2>Ceremony</h2>
+          <hr/>
+          <p>
+            Faith Lutheran Church
+            <br/>
+            10395 University Ave
+            <br/>
+            Clive, IA 50325
+            <br/>
+            <a href="https://goo.gl/maps/R2p74qx1cmQ2">Google Maps</a>
+          </p>
+        </div>
+        <div>
+          <h2>Reception</h2>
+          <hr/>
+          <p>
+            Holiday Inn
+            <br/>
+            1050 6th Ave
+            <br/>
+            Des Moines, IA 50314
+            <br/>
+            <a href="https://goo.gl/maps/R2p74qx1cmQ2">Google Maps</a>
+            <br/>
+            <br/>
+            Call <a href="tel:+5152830151">515.283.0151</a> to reserve a room
+          </p>
+        </div>
+      </div>
     </vertical-pane>
   </template>
 
@@ -79,14 +341,20 @@
               value: function() {
                   var top = this.$.top;
                   var bottom = this.$.bottom;
+                  var left = this.$.left;
+                  var right = this.$.right;
                   return {
                       'entry': [
                         {animatable: top, type: 'from-top'},
-                        {animatable: bottom, type: 'from-bottom'}
+                        {animatable: bottom, type: 'from-bottom'},
+                        {animatable: left, type: 'from-top'},
+                        {animatable: right, type: 'from-bottom'}
                       ],
                       'exit': [
                         {animatable: top, type: 'to-top'},
-                        {animatable: bottom, type: 'to-bottom'}
+                        {animatable: bottom, type: 'to-bottom'},
+                        {animatable: left, type: 'to-bottom'},
+                        {animatable: right, type: 'to-top'}
                       ]
                   }
               }

@@ -35,6 +35,7 @@
 
     :host horizontal-pane img {
       height: 100%;
+      width: 100%;
     }
 
     :host vertical-pane img {
@@ -69,7 +70,6 @@
 
     :host h2 {
       font-family: 'Oswald', sans-serif;
-      font-weight: 100;
     }
 
     .pane-content p {
@@ -129,14 +129,14 @@
       }
     }
 
-    /* Viewport is 350px or less ----------- */
+    /* Viewport is 349px or less ----------- */
     @media only screen and (max-width : 349px) {
       .pane-content p {
         font-size: 12px;
       }
     }
 
-    /* Viewport is 350px or less ----------- */
+    /* Viewport is landscape and 1 to 349px ----------- */
     @media only screen and (max-height : 349px)
      and (orientation: landscape) and (min-height: 1px) {
       .pane-content p {
@@ -147,7 +147,7 @@
       }
     }
 
-    /* Viewport is 360px or less ----------- */
+    /* Viewport is 350 to 361px ----------- */
     @media only screen and (max-width : 361px)
       and (min-width : 350px) {
       .pane-content p {
@@ -155,7 +155,7 @@
       }
     }
 
-    /* Viewport is 350px or less ----------- */
+    /* Viewport is landscape and 350 to 361px  ----------- */
     @media only screen and (max-height : 361px)
      and (orientation: landscape) and (min-height: 350px) {
       .pane-content p {
@@ -166,7 +166,7 @@
       }
     }
 
-    /* Viewport is 420px or less ----------- */
+    /* Viewport is 361 to 701px ----------- */
     @media only screen and (max-width : 701px)
       and (min-width : 361px) {
       .pane-content p {
@@ -177,7 +177,7 @@
       }
     }
 
-    /* Viewport is 350px or less ----------- */
+    /* Viewport is landscape and 361 to 701px ----------- */
     @media only screen and (max-height : 701px)
      and (orientation: landscape) and (min-height: 361px) {
       .pane-content p {
@@ -188,14 +188,39 @@
       }
     }
 
-    /* Viewport is 420px or less ----------- */
-    @media only screen and (max-width : 1000px)
+    /* Viewport is 701 to 1000px ----------- */
+    @media only screen and (max-width : 900px)
       and (min-width : 701px) {
       .pane-content p {
-        font-size: 14px;
+        font-size: 13px;
       }
       .pane-content h2 {
-        font-size: 28px;
+        font-size: 25px;
+      }
+    }
+
+    /* Viewport is 701 to 1000px ----------- */
+    @media only screen and (max-width : 1000px)
+      and (min-width : 801px) {
+      .pane-content p {
+        font-size: 16px;
+      }
+      .pane-content h2 {
+        font-size: 25px;
+      }
+    }
+
+    @media only screen and (max-width: 100000px)
+      and (min-width: 1001px){
+      .pane-content p {
+        font-size: 24px;
+      }
+      .pane-content h2 {
+        font-size: 40px;
+      }
+      .pane-content {
+        padding-left: 18px;
+        padding-right: 18px;
       }
     }
 
@@ -215,14 +240,24 @@
   <template>
     <horizontal-pane class="hidden-sm display-ls" id="left">
       <div class="pane-content">
-        <h2>Welcome</h2>
+        <h2>Agenda</h2>
         <p>
-          We are so excited to be joined by all of you to celebrate
-          the start of our marriage! We cannot think of anyone
-          better to share this special day with. Here you will find
-          details and directions for the ceremony and reception,
-          booking information, as well as our registry.
-          Let the countdown begin!
+          3:30 - Ceremony
+        </p>
+        <p>
+          Do stuff
+        </p>
+        <p>
+          5:00 - Reception
+        </p>
+        <p>
+          6:00 - Dinner
+        </p>
+        <p>
+          7:00 - Dance
+        </p>
+        <p>
+
         </p>
         <h2 id="day-count">200 days</h2>
     </div>
