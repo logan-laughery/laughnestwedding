@@ -172,105 +172,100 @@
       .hidden-sm {
         display: none;
       }
-    }
-
-    /* Viewport is 349px or less ----------- */
-    @media only screen and (max-width : 349px) {
-      .pane-content p {
-        font-size: 12px;
+      :host {
+        --layout-fit: {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-position-y: 30% !important;
+        }
       }
     }
 
-    /* Viewport is landscape and 1 to 349px ----------- */
-    @media only screen and (max-height : 349px)
-     and (orientation: landscape) and (min-height: 1px) {
+    .pane-content p {
+      font-size: 1.3vh;
+    }
+    .pane-content h2 {
+      font-size: 1.8vh;
+    }
+
+    /* Viewport is 700px or less and portrait ----------- */
+    @media only screen and (max-width : 700px)
+      and (orientation: portrait){
+        .pane-content p {
+          font-size: 1.7vh;
+        }
+        .pane-content h2 {
+          font-size: 3vh;
+        }
+    }
+
+    @media only screen and (max-width : 737px)
+      and (orientation: landscape) {
+        .pane-content p {
+          font-size: 2.5vh !important;
+        }
+        .pane-content h2 {
+          font-size: 4vh !important;
+        }
+    }
+
+    @media only screen and (max-width : 737px)
+      and (min-aspect-ratio: 3/4)
+      and (max-aspect-ratio: 18/12){
+        .pane-content p {
+          font-size: 1.5vh !important;
+        }
+        .pane-content h2 {
+          font-size: 2.6vh !important;
+        }
+    }
+
+
+    @media only screen and (orientation: landscape) {
       .pane-content p {
-        font-size: 12px !important;
+        font-size: 3vh;
       }
       .pane-content h2 {
-        font-size: 26px;
+        font-size: 4vh;
       }
     }
 
-    /* Viewport is 350 to 361px ----------- */
-    @media only screen and (max-width : 361px)
-      and (min-width : 350px) {
+    @media only screen and (orientation: landscape)
+      and (max-width: 1300px)
+      and (min-aspect-ratio: 3/4)
+      and (max-aspect-ratio: 18/12){
       .pane-content p {
-        font-size: 15px;
+        font-size: 2.5vh;
       }
     }
 
-    /* Viewport is landscape and 350 to 361px  ----------- */
-    @media only screen and (max-height : 361px)
-     and (orientation: landscape) and (min-height: 350px) {
+    @media only screen and (orientation: landscape)
+      and (max-width: 1000px)
+      and (min-aspect-ratio: 3/4)
+      and (max-aspect-ratio: 18/12){
       .pane-content p {
-        font-size: 14px !important;
+        font-size: 1.7vh;
+      }
+      .pane-content h {
+        font-size: 3vh;
+      }
+    }
+
+    /*Only applied when width is 2x the height*/
+    @media only screen and (min-aspect-ratio: 2/1){
+      .pane-content p {
+        font-size: 3vh;
       }
       .pane-content h2 {
-        font-size: 26px;
-      }
-    }
-
-    /* Viewport is 361 to 701px ----------- */
-    @media only screen and (max-width : 701px)
-      and (min-width : 361px) {
-      .pane-content p {
-        font-size: 16px;
-      }
-      .pane-content h2 {
-        font-size: 28px;
-      }
-    }
-
-    /* Viewport is landscape and 361 to 701px ----------- */
-    @media only screen and (max-height : 701px)
-     and (orientation: landscape) and (min-height: 361px) {
-      .pane-content p {
-        font-size: 14px !important;
-      }
-      .pane-content h2 {
-        font-size: 26px;
-      }
-    }
-
-    /* Viewport is 701 to 1000px ----------- */
-    @media only screen and (max-width : 900px)
-      and (min-width : 701px) {
-      .pane-content p {
-        font-size: 12px;
-      }
-      .pane-content h2 {
-        font-size: 18px;
-      }
-    }
-
-    /* Viewport is 701 to 1000px ----------- */
-    @media only screen and (max-width : 1000px)
-      and (min-width : 801px) {
-      .pane-content p {
-        font-size: 14px;
-      }
-      .pane-content h2 {
-        font-size: 23px;
-      }
-    }
-
-    @media only screen and (max-width: 1200px)
-      and (min-width: 1001px){
-      .pane-content p {
-        font-size: 20px;
-      }
-      .pane-content h2 {
-        font-size: 36px;
-      }
-      .pane-content {
-        padding-left: 18px;
-        padding-right: 18px;
+        font-size: 5vh;
       }
     }
 
     @media only screen and (max-width: 100000px)
-      and (min-width: 1201px){
+      and (min-width: 1201px) and (min-height: 786px){
       .pane-content p {
         font-size: 24px;
       }
@@ -316,7 +311,7 @@
           <h2>Reception</h2>
           <hr/>
           <p>
-            DWTN Des Moines Holiday Inn
+            Downtown Dsm Holiday Inn
             <br/>
             1050 6th Ave
             <br/>
@@ -360,7 +355,7 @@
           <h2>Reception</h2>
           <hr/>
           <p>
-            DWTN Des Moines Holiday Inn
+            Downtown Des Moines Holiday Inn
             <br/>
             1050 6th Ave
             <br/>
