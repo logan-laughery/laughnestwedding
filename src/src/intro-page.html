@@ -118,12 +118,14 @@
     .pane-content p {
       margin-top: 0px;
       margin-bottom: 0px;
+      font-size: 1.7vw;
     }
 
     .pane-content h2{
       margin: 0px;
       margin-top: 0px;
       margin-bottom: 0px;
+      font-size: 4vw;
     }
 
     .hidden-sm {
@@ -172,89 +174,60 @@
       }
     }
 
-    /* Viewport is 349px or less ----------- */
-    @media only screen and (max-width : 349px) {
-      .pane-content p {
-        font-size: 12px;
-      }
+    /* Viewport is 700px or less ----------- */
+    @media only screen and (max-width : 700px)
+      and (orientation: portrait){
+        .pane-content p {
+          font-size: 1.7vh;
+        }
+        .pane-content h2 {
+          font-size: 4vh;
+        }
     }
 
-    /* Viewport is landscape and 1 to 349px ----------- */
-    @media only screen and (max-height : 349px)
-     and (orientation: landscape) and (min-height: 1px) {
+    @media only screen and (max-width : 737px)
+      and (orientation: landscape) {
+        .pane-content p {
+          font-size: 3vh !important;
+        }
+        .pane-content h2 {
+          font-size: 5vh !important;
+        }
+    }
+
+    @media only screen and (max-width : 737px)
+      and (min-aspect-ratio: 3/4)
+      and (max-aspect-ratio: 18/12){
+        .pane-content p {
+          font-size: 1.7vh !important;
+        }
+        .pane-content h2 {
+          font-size: 4vh !important;
+        }
+    }
+
+
+    @media only screen and (orientation: landscape) {
       .pane-content p {
-        font-size: 12px !important;
+        font-size: 2vh;
       }
       .pane-content h2 {
-        font-size: 26px;
+        font-size: 4vh;
       }
     }
 
-    /* Viewport is 350 to 361px ----------- */
-    @media only screen and (max-width : 361px)
-      and (min-width : 350px) {
+    /*Only applied when width is 2x the height*/
+    @media only screen and (min-aspect-ratio: 2/1){
       .pane-content p {
-        font-size: 15px;
-      }
-    }
-
-    /* Viewport is landscape and 350 to 361px  ----------- */
-    @media only screen and (max-height : 361px)
-     and (orientation: landscape) and (min-height: 350px) {
-      .pane-content p {
-        font-size: 14px !important;
+        font-size: 3vh;
       }
       .pane-content h2 {
-        font-size: 26px;
-      }
-    }
-
-    /* Viewport is 361 to 701px ----------- */
-    @media only screen and (max-width : 701px)
-      and (min-width : 361px) {
-      .pane-content p {
-        font-size: 16px;
-      }
-      .pane-content h2 {
-        font-size: 28px;
-      }
-    }
-
-    /* Viewport is landscape and 361 to 701px ----------- */
-    @media only screen and (max-height : 701px)
-     and (orientation: landscape) and (min-height: 361px) {
-      .pane-content p {
-        font-size: 14px !important;
-      }
-      .pane-content h2 {
-        font-size: 26px;
-      }
-    }
-
-    /* Viewport is 701 to 1000px ----------- */
-    @media only screen and (max-width : 900px)
-      and (min-width : 701px) {
-      .pane-content p {
-        font-size: 13px;
-      }
-      .pane-content h2 {
-        font-size: 25px;
-      }
-    }
-
-    /* Viewport is 701 to 1000px ----------- */
-    @media only screen and (max-width : 1000px)
-      and (min-width : 801px) {
-      .pane-content p {
-        font-size: 16px;
-      }
-      .pane-content h2 {
-        font-size: 25px;
+        font-size: 5vh;
       }
     }
 
     @media only screen and (max-width: 100000px)
-      and (min-width: 1001px){
+      and (min-width: 1101px) and (min-height: 786px){
       .pane-content p {
         font-size: 24px;
       }

@@ -56,6 +56,22 @@
               margin-bottom: 0px;
             }
           }
+
+          /*Only applied when width is 2x the height*/
+          @media only screen and (min-aspect-ratio: 16/12)
+            and (max-aspect-ratio: 30/12)
+            and (max-width : 1400px) and (min-width: 700px){
+              :host {
+                font-size: 28px;
+                margin-top: -10px;
+                margin-left: -14px;
+                left: 2px !important;
+              }
+              h1 {
+                margin-top: -7px;
+            		font-size: 4vh;
+              }
+          }
         </style>
 
         <h1>ANNEMARIE &</br>LOGAN</h1>
