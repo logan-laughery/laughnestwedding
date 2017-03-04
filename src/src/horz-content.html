@@ -23,19 +23,19 @@
       color: #282828;
     }
 
-    :host page-title {
+    page-title {
       position: fixed;
       top: 0;
       left: 12px;
     }
 
-    :host neon-animated-pages {
+    neon-animated-pages {
       width: 60%;
       height: 100%;
     }
 
     @media only screen and (orientation: landscape) {
-      :host neon-animated-pages {
+      neon-animated-pages {
         max-width: 135vh !important;
       }
     }
@@ -49,10 +49,10 @@
         font-size: 11px;
         width: 70px;
       }
-      :host neon-animated-pages {
+      neon-animated-pages {
         width: 100%;
       }
-      :host page-title {
+      page-title {
         position: fixed;
         top: 0;
         left: 1px;
@@ -84,7 +84,7 @@
 
     /* Viewport is 320px or less ----------- */
     @media only screen and (max-width : 700px) {
-      neon-animated-pages {
+      :host neon-animated-pages {
         width: 80%;
       }
     }

@@ -20,17 +20,13 @@
         align-items: flex-end;
         flex-direction: column;
       }
-      :host side-menu-item:first-of-type {
-        transform: scale(2);
-        transform-origin: right;
+
+      side-menu-item:nth-of-type(1) {
+        --side-menu-item-transform: scale(2);
       }
 
       :host([alignleft]) {
         align-items: flex-start;
-      }
-
-      :host([alignleft]) side-menu-item:first-of-type {
-        transform-origin: left;
       }
 
       :host {

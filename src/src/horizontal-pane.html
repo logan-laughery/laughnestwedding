@@ -15,9 +15,9 @@
     .inner {
       position: relative;
       width: 100%;
-      padding-top: 142%;
-      margin-left: 10px;
-      margin-right: 10px;
+      padding-top: 150%;
+      /*margin-left: 10px;
+      margin-right: 10px;*/
       /*background-color: var(--horizontal-pane-background-color, #91a7d0);*/
     }
     .outter {
@@ -37,17 +37,24 @@
       right: 0;
       overflow: hidden;
     }
+    .flex-fixer {
+      width: 100%;
+      margin-left: 10px;
+      margin-right: 10px;
+    }
   </style>
 
   <template>
     <style include="iron-flex"></style>
     <animation-pane class="outter" id="content">
-      <paper-material elevation="3" class="inner">
-        <div class="content-wrapper">
-          <content>
-          </content>
-        </div>
-      </paper-material>
+      <div class="flex-fixer">
+        <paper-material elevation="3" class="inner">
+          <div class="content-wrapper">
+            <content>
+            </content>
+          </div>
+        </paper-material>
+      </div>
     </animation-pane>
   </template>
 

@@ -18,9 +18,31 @@
       :host {
         font-family: 'Oswald', sans-serif;
       }
-    </style>
-    <content></content>
 
+      #wrapper {
+        transform: var(--side-menu-item-transform);
+        transform-origin: right;
+      }
+
+      #wrapper[alignleft] {
+        transform-origin: 1px;
+      }
+
+      #wrapper.priority.active {
+        transform: scale(2) translateX(1px);
+      }
+
+      #wrapper.priority.active.left {
+        transform: scale(2) translateX(-1px);
+      }
+
+      #wrapper.inactive {
+        transform: none;
+      }
+    </style>
+    <div id="wrapper" class="priority" alignleft$="[[alignleft]]">
+      <content></content>
+    </div>
   </template>
 </dom-module>
 
@@ -50,7 +72,7 @@
           return {
             'entry': {
               name: 'transform-animation',
-              node: this,
+              node: this.$.wrapper,
               transformTo: translation,
               transformOrigin: origin,
               timing: {
@@ -60,7 +82,7 @@
             },
             'entry-left': {
               name: 'transform-animation',
-              node: this,
+              node: this.$.wrapper,
               transformTo: translationLeft,
               transformOrigin: originLeft,
               timing: {
@@ -70,8 +92,8 @@
             },
             'exit': {
               name: 'transform-animation',
-              node: this,
-              transformTo: 'scale(1)',
+              node: this.$.wrapper,
+              transformTo: 'scale(1) translate(0px)',
               transformFrom: translation,
               transformOrigin: origin,
               timing: {
@@ -80,8 +102,8 @@
             },
             'exit-left': {
               name: 'transform-animation',
-              node: this,
-              transformTo: 'scale(1)',
+              node: this.$.wrapper,
+              transformTo: 'scale(1)  translate(0px)',
               transformFrom: translationLeft,
               transformOrigin: originLeft,
               timing: {
@@ -101,12 +123,20 @@
       }
 
       var translation = this.alignleft ? 'scale(2) translateX(-1px)'
-        : 'scale(2) translate(1px)';
+        : 'scale(2) translateX(1px)';
       var origin = this.alignleft ? 'left' : 'right';
 
-      this.style.transform = translation;
-      this.style.transformOrigin = origin;
-      this.style.zIndex = 1;
+      this.$.wrapper.classList.add('active');
+      if (this.alignleft)
+        this.$.wrapper.classList.add('left');
+      // this.$.wrapper.style.transform = 'scale(2)';
+      // this.$.wrapper.style.msTransform = 'scale(2)';
+      // this.$.wrapper.style.zIndex = 1;
+      // this.style.transform = translation;
+      // this.style.msTransform = translation;
+      // this.style.transformOrigin = origin;
+      // this.style.msTransformOrigin = origin;
+      // this.style.zIndex = 1;
     },
 
     exit: function() {
@@ -116,8 +146,13 @@
         this.playAnimation('exit');
       }
 
-      this.style.transform = 'initial';
-      this.style.zIndex = '';
+      this.$.wrapper.classList.remove('active');
+      this.$.wrapper.classList.add('inactive');
+      // this.$.wrapper.style.transform = 'initial';
+      // this.$.wrapper.style.msTransform = 'initial';
+      // this.$.wrapper.zIndex = '';
+      // this.style.msTransform = 'initial';
+      // this.style.zIndex = '';
     }
 
   });
